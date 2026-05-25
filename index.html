@@ -3,325 +3,566 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XV Años Ashley Carrasco Acosta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <title>XV Años Ashley - Invitación Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Paleta de colores: Lila y Dorado */
-            --lilac: #C8A2C8;
-            --lilac-dark: #8A648A;
-            --lilac-bg: #F4EEF4;
-            --gold: #D4AF37;
-            --gold-light: #F3E5AB;
+            /* Paleta Premium */
+            --lilac-soft: #E8DCE8;
+            --lilac-main: #B599B5;
+            --lilac-dark: #6B4E6B;
+            --gold-gradient: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
             --bg-color: #FAFAFA;
-            --text-dark: #333333;
+            --text-dark: #2C2C2C;
             --text-light: #FFFFFF;
         }
 
-        body { 
-            margin: 0; 
-            padding: 0; 
-            background-color: #e9e9e9; 
-            font-family: 'Montserrat', sans-serif; 
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #1a1a1a; /* Fondo oscuro detrás de la invitación */
+            overflow-x: hidden;
         }
 
-        .invitation-container { 
-            max-width: 450px; 
-            margin: 0 auto; 
-            background-color: var(--bg-color); 
-            box-shadow: 0 0 20px rgba(0,0,0,0.1); 
-            overflow: hidden; 
+        /* Contenedor principal estilo móvil */
+        .app-container {
+            max-width: 420px;
+            margin: 0 auto;
+            background-color: var(--bg-color);
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            overflow: hidden;
         }
 
-        h1, h2, h3 { 
-            font-family: 'Playfair Display', serif; 
-            color: var(--lilac-dark); 
-            text-align: center; 
-            font-weight: normal; 
+        /* =========================================
+           ANIMACIÓN DEL SOBRE Y SELLO (ENTRADA)
+           ========================================= */
+        #envelope {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 9999;
+            display: flex;
+            pointer-events: auto;
+            transition: visibility 0s 1.5s;
+        }
+        
+        #envelope.open {
+            visibility: hidden;
+            pointer-events: none;
         }
 
-        /* Sección Hero / Portada */
-        .hero { 
-            padding: 60px 20px; 
-            text-align: center; 
-            border: 2px solid var(--gold); 
-            margin: 20px; 
-            border-radius: 15px; 
-            background-color: var(--lilac-bg);
+        .flap {
+            width: 50%;
+            height: 100%;
+            background-color: #FDFDFD;
+            background-image: url('https://www.transparenttextures.com/patterns/watercolor.png'); /* Textura sutil de papel */
+            position: absolute;
+            top: 0;
+            transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1), opacity 1.5s ease;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
         }
 
-        .hero h1 { 
-            font-size: 3.5rem; 
-            margin: 10px 0; 
-            color: var(--lilac-dark); 
+        .flap.left { 
+            left: 0; 
+            border-right: 1px solid rgba(181, 153, 181, 0.3);
+            transform-origin: left center;
+        }
+        
+        .flap.right { 
+            right: 0; 
+            transform-origin: right center;
+            overflow: hidden;
         }
 
-        .hero p { 
-            color: var(--text-dark); 
-            letter-spacing: 2px; 
-            text-transform: uppercase; 
-            font-size: 0.8rem; 
+        /* Flores en el sobre derecho */
+        .envelope-flowers {
+            position: absolute;
+            top: 50%;
+            left: -30%;
+            transform: translateY(-50%);
+            width: 150%;
+            height: auto;
+            opacity: 0.85;
+            pointer-events: none;
         }
 
-        .hero .date { 
-            font-size: 1.5rem; 
-            color: var(--gold); 
-            margin-top: 20px; 
-            font-family: 'Playfair Display', serif;
+        #envelope.open .flap.left { transform: translateX(-100%); }
+        #envelope.open .flap.right { transform: translateX(100%); }
+
+        /* Sello interactivo */
+        .seal-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10000;
+            cursor: pointer;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Sección de Fotos y Mensaje */
-        .photo-section { 
-            padding: 20px; 
-            text-align: center; 
+        .seal-wrapper:hover {
+            transform: translate(-50%, -50%) scale(1.05);
         }
 
-        .photo-message {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            color: var(--lilac-dark);
-            margin-bottom: 25px;
+        #envelope.open .seal-wrapper {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.3);
+        }
+
+        /* Texto curvo SVG */
+        .curved-text-svg {
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            pointer-events: none;
+            animation: spinText 20s linear infinite;
+        }
+
+        .curved-text-svg text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 14px;
+            fill: var(--lilac-dark);
+            letter-spacing: 2px;
             font-style: italic;
         }
 
-        .photo-section img { 
-            width: 100%; 
-            border-radius: 150px 150px 0 0; /* Arco elegante */
-            border: 3px solid var(--gold); 
-            box-sizing: border-box; 
-            object-fit: cover;
-            height: 400px;
-        }
-
-        /* Sección Cuenta Regresiva y Calendario */
-        .calendar-section { 
-            background-color: var(--lilac-dark); 
-            padding: 50px 20px; 
-            color: var(--text-light); 
-            text-align: center; 
-        }
-
-        .calendar-section .subtitle { 
-            font-size: 1rem; 
-            letter-spacing: 3px; 
-            color: var(--text-light); 
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        /* Cuenta Regresiva */
-        .countdown { 
-            display: flex; 
-            justify-content: center; 
+        /* Diseño del Sello de Cera */
+        .wax-seal {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, #D1B8D1, #B599B5, #8A6E8A);
+            border-radius: 50%;
+            box-shadow: 
+                inset 0 0 5px rgba(255,255,255,0.4),
+                inset 2px 2px 5px rgba(255,255,255,0.5),
+                inset -3px -3px 8px rgba(0,0,0,0.3),
+                0 4px 10px rgba(0,0,0,0.2);
+            position: relative;
+            display: flex;
             align-items: center;
-            gap: 10px; 
-            margin-bottom: 40px; 
+            justify-content: center;
+            border: 2px solid rgba(255,255,255,0.2);
         }
 
-        .time-box { 
-            text-align: center; 
-            min-width: 60px;
+        /* Grabado dorado dentro del sello */
+        .wax-seal::after {
+            content: 'A';
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 40px;
+            color: transparent;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
         }
 
-        .time-box span { 
-            display: block; 
-            font-size: 2.2rem; 
-            font-family: 'Playfair Display', serif; 
-            font-weight: 600; 
-            color: var(--text-light);
+        /* =========================================
+           CONTENIDO DE LA INVITACIÓN
+           ========================================= */
+        #invitation-content {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 1.5s ease 0.5s, transform 1.5s ease 0.5s;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            background-color: var(--bg-color);
         }
 
-        .time-box label { 
-            font-size: 0.65rem; 
-            letter-spacing: 1px; 
-            text-transform: uppercase; 
-            color: var(--gold); 
+        #invitation-content.visible {
+            opacity: 1;
+            transform: scale(1);
         }
 
-        .separator {
-            font-size: 2rem; 
-            font-family: 'Playfair Display', serif;
-            margin-top: -15px;
-            color: var(--text-light);
+        /* Tipografías aplicadas */
+        .gold-text {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
         }
 
-        /* Calendario */
-        .calendar-header { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 1.5rem; 
-            margin-bottom: 25px; 
-            color: var(--text-light); 
-            letter-spacing: 2px;
+        h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; text-align: center; }
+
+        /* Portada / Hero */
+        .hero {
+            padding: 80px 30px 40px;
+            text-align: center;
+            position: relative;
         }
         
-        .calendar-header span {
-            font-family: 'Montserrat', sans-serif;
+        .hero .subtitle {
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--lilac-dark);
+            margin-bottom: -15px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin: 10px 0;
+            line-height: 1;
+        }
+
+        .hero .date {
+            font-size: 1.2rem;
+            letter-spacing: 5px;
+            color: var(--text-dark);
+            margin-top: 20px;
+            border-top: 1px solid var(--lilac-soft);
+            border-bottom: 1px solid var(--lilac-soft);
+            padding: 10px 0;
+            display: inline-block;
+        }
+
+        /* Sección Foto (Arco Premium) */
+        .photo-section {
+            padding: 20px 30px;
+            text-align: center;
+        }
+
+        .photo-arch {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 200px 200px 0 0;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+            border: 1px solid rgba(191, 149, 63, 0.3); /* Borde dorado tenue */
+        }
+
+        .verse {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--lilac-dark);
+            margin: 30px 0;
+            line-height: 1.4;
+            padding: 0 20px;
+        }
+
+        /* Sección Calendario y Cuenta Regresiva */
+        .calendar-section {
+            background-color: var(--lilac-dark);
+            padding: 60px 20px;
+            color: var(--text-light);
+            text-align: center;
+            position: relative;
+        }
+
+        .calendar-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: var(--gold-gradient);
+        }
+
+        .countdown-title {
             font-size: 0.9rem;
-            color: var(--gold);
-            font-weight: bold;
+            letter-spacing: 4px;
+            margin-bottom: 25px;
+            color: var(--text-light);
+            opacity: 0.9;
         }
 
-        .calendar-grid { 
-            display: grid; 
-            grid-template-columns: repeat(7, 1fr); 
-            gap: 10px; 
-            max-width: 320px; 
-            margin: 0 auto 35px auto; 
-            font-size: 0.9rem; 
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
         }
 
-        .day-name { 
-            font-weight: 600; 
-            color: var(--gold); 
-            font-size: 0.75rem; 
-            letter-spacing: 1px;
+        .time-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .day { 
-            padding: 8px 0; 
+        .time-box span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            line-height: 1;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .time-box label {
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+
+        /* Calendario Premium */
+        .calendar-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
             color: var(--text-light);
         }
 
-        .day.highlight { 
-            border: 1px solid var(--gold); 
-            border-radius: 50%; 
-            color: var(--gold); 
-            font-weight: bold; 
-            position: relative; 
+        .calendar-header span {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            margin-top: 5px;
+            color: #E8DCE8;
         }
 
-        /* Botón */
-        .btn { 
-            display: inline-block; 
-            padding: 15px 35px; 
-            background-color: transparent; 
-            border: 1px solid var(--gold); 
-            color: var(--gold); 
-            text-decoration: none; 
-            font-family: 'Montserrat', sans-serif; 
-            font-size: 0.8rem; 
-            letter-spacing: 2px; 
-            text-transform: uppercase; 
-            transition: all 0.3s ease; 
-            border-radius: 30px; 
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            max-width: 300px;
+            margin: 0 auto 40px auto;
+            font-size: 0.85rem;
         }
 
-        .btn:hover { 
-            background-color: var(--gold); 
-            color: var(--lilac-dark); 
+        .day-name {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            opacity: 0.7;
+            margin-bottom: 10px;
         }
+
+        .day { padding: 5px 0; color: rgba(255,255,255,0.8); }
+
+        .day.highlight {
+            position: relative;
+            color: var(--bg-color);
+            font-weight: 600;
+        }
+
+        .day.highlight::before {
+            content: '♥'; /* Corazón en lugar de círculo para ser más premium, o círculo dorado */
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 28px;
+            color: transparent;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            z-index: -1;
+            opacity: 0.4;
+        }
+        
+        .day.highlight::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 25px; height: 25px;
+            border: 1px solid #D4AF37;
+            border-radius: 50%;
+            z-index: -2;
+        }
+
+        /* Botón Premium */
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: transparent;
+            border: 1px solid #D4AF37; /* Base gold */
+            border-image: var(--gold-gradient) 1;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--gold-gradient);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .btn:hover::before { opacity: 0.2; }
 
         /* Itinerario */
-        .itinerary { 
-            background-color: var(--bg-color); 
-            padding: 50px 20px; 
+        .itinerary {
+            padding: 70px 30px;
+            background-color: var(--bg-color);
         }
 
-        .itinerary h2 { 
-            color: var(--lilac-dark); 
-            margin-bottom: 30px;
+        .itinerary h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--lilac-dark);
         }
 
-        .timeline-item { 
-            margin-bottom: 25px; 
-            text-align: center; 
-            border-bottom: 1px solid #eee;
-            padding-bottom: 15px;
+        .timeline-item {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 20px;
+            background: var(--gold-gradient);
         }
         
-        .timeline-item:last-child {
-            border-bottom: none;
+        .timeline-item:last-child::after { display: none; }
+
+        .timeline-time {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 5px;
         }
 
-        .timeline-time { 
-            font-size: 1.2rem; 
-            font-weight: 600; 
-            color: var(--gold); 
-            font-family: 'Playfair Display', serif; 
-        }
-
-        .timeline-desc { 
-            font-size: 0.9rem; 
-            margin-top: 5px; 
+        .timeline-title {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             color: var(--text-dark);
+            font-weight: 500;
         }
 
+        /* Scrollbar styling para un look más limpio */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: var(--lilac-main); }
     </style>
 </head>
 <body>
 
-<div class="invitation-container">
-    
-    <div class="hero">
-        <p>MIS XV AÑOS</p>
-        <h1>Ashley</h1>
-        <p>Carrasco Acosta</p>
-        <div class="date">23 . 10 . 2026</div>
-    </div>
+<div class="app-container">
 
-    <div class="photo-section">
-        <div class="photo-message">
-            Con la bendición y el amor de Dios, él escribió nuestra historia, y queremos que seas parte de este hermoso día.
-        </div>
-        <img src="https://images.unsplash.com/photo-1541216970279-aff1bd9dc6b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Ashley XV Años">
-    </div>
-
-    <div class="calendar-section">
-        <div class="subtitle">FALTAN</div>
-        
-        <div class="countdown" id="countdown">
-            <div class="time-box"><span id="days">00</span><label>Días</label></div>
-            <div class="separator">:</div>
-            <div class="time-box"><span id="hours">00</span><label>Horas</label></div>
-            <div class="separator">:</div>
-            <div class="time-box"><span id="minutes">00</span><label>Minutos</label></div>
-            <div class="separator">:</div>
-            <div class="time-box"><span id="seconds">00</span><label>Segundos</label></div>
-        </div>
-
-        <div class="calendar-header">
-            EL GRAN DÍA<br>
-            <span>OCTUBRE 2026</span>
+    <div id="envelope">
+        <div class="flap left"></div>
+        <div class="flap right">
+            <img src="https://images.unsplash.com/photo-1572455857811-045fb4255b5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Flores" class="envelope-flowers" style="mix-blend-mode: multiply; filter: grayscale(20%) sepia(20%) hue-rotate(250deg) saturate(150%);">
         </div>
         
-        <div class="calendar-grid">
-            <div class="day-name">LUN</div><div class="day-name">MAR</div><div class="day-name">MIE</div><div class="day-name">JUE</div><div class="day-name">VIE</div><div class="day-name">SAB</div><div class="day-name">DOM</div>
+        <div class="seal-wrapper" onclick="openEnvelope()">
+            <svg class="curved-text-svg" viewBox="0 0 200 200">
+                <path id="curve-path" d="M 40 100 A 60 60 0 1 1 40 100.01" fill="transparent" />
+                <text>
+                    <textPath href="#curve-path" startOffset="10%">Clic aquí para abrir • Clic aquí para abrir •</textPath>
+                </text>
+            </svg>
+            <div class="wax-seal"></div>
+        </div>
+    </div>
+
+    <div id="invitation-content">
+        
+        <div class="hero">
+            <div class="subtitle">MIS XV AÑOS</div>
+            <h1 class="gold-text">Ashley</h1>
+            <div class="subtitle" style="margin-top: 10px; font-size: 0.7rem;">CARRASCO ACOSTA</div>
+            <div class="date">23 • 10 • 2026</div>
+        </div>
+
+        <div class="photo-section">
+            <div class="verse">
+                "Con la bendición y el amor de Dios, él escribió nuestra historia, y queremos que seas parte de este hermoso día."
+            </div>
+            <img src="https://images.unsplash.com/photo-1517630713740-8bd71427181c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Ashley" class="photo-arch">
+        </div>
+
+        <div class="calendar-section">
+            <div class="countdown-title">FALTAN</div>
             
-            <div></div><div></div><div></div>
-            <div class="day">1</div><div class="day">2</div><div class="day">3</div><div class="day">4</div>
-            <div class="day">5</div><div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day">9</div><div class="day">10</div><div class="day">11</div>
-            <div class="day">12</div><div class="day">13</div><div class="day">14</div><div class="day">15</div><div class="day">16</div><div class="day">17</div><div class="day">18</div>
-            <div class="day">19</div><div class="day">20</div><div class="day">21</div><div class="day">22</div>
-            <div class="day highlight">23</div> <div class="day">24</div><div class="day">25</div>
-            <div class="day">26</div><div class="day">27</div><div class="day">28</div><div class="day">29</div><div class="day">30</div><div class="day">31</div><div></div>
+            <div class="countdown" id="countdown">
+                <div class="time-box"><span id="days">00</span><label>Días</label></div>
+                <div class="time-box"><span id="hours">00</span><label>Horas</label></div>
+                <div class="time-box"><span id="minutes">00</span><label>Minutos</label></div>
+                <div class="time-box"><span id="seconds">00</span><label>Seg</label></div>
+            </div>
+
+            <div class="calendar-header">
+                EL GRAN DÍA<br>
+                <span>OCTUBRE 2026</span>
+            </div>
+            
+            <div class="calendar-grid">
+                <div class="day-name">LUN</div><div class="day-name">MAR</div><div class="day-name">MIE</div><div class="day-name">JUE</div><div class="day-name">VIE</div><div class="day-name">SAB</div><div class="day-name">DOM</div>
+                
+                <div></div><div></div><div></div>
+                <div class="day">1</div><div class="day">2</div><div class="day">3</div><div class="day">4</div>
+                <div class="day">5</div><div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day">9</div><div class="day">10</div><div class="day">11</div>
+                <div class="day">12</div><div class="day">13</div><div class="day">14</div><div class="day">15</div><div class="day">16</div><div class="day">17</div><div class="day">18</div>
+                <div class="day">19</div><div class="day">20</div><div class="day">21</div><div class="day">22</div>
+                <div class="day highlight">23</div> 
+                <div class="day">24</div><div class="day">25</div>
+                <div class="day">26</div><div class="day">27</div><div class="day">28</div><div class="day">29</div><div class="day">30</div><div class="day">31</div><div></div>
+            </div>
+
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+A%C3%B1os+de+Ashley&dates=20261023T230000Z/20261024T050000Z&details=Celebremos+juntos+los+XV+a%C3%B1os+de+Ashley&location=CDMX" target="_blank" class="btn">AGREGAR A CALENDARIO</a>
         </div>
 
-        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+A%C3%B1os+de+Ashley&dates=20261023T230000Z/20261024T050000Z&details=Celebremos+juntos+los+XV+a%C3%B1os+de+Ashley+Carrasco+Acosta&location=CDMX" target="_blank" class="btn">Agregar a calendario</a>
+        <div class="itinerary">
+            <h2>El Programa</h2>
+            
+            <div class="timeline-item">
+                <div class="timeline-time">18:00</div>
+                <div class="timeline-title">Ceremonia Religiosa</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-time">20:00</div>
+                <div class="timeline-title">Recepción de Invitados</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-time">21:00</div>
+                <div class="timeline-title">Cena y Brindis</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-time">22:30</div>
+                <div class="timeline-title">Apertura de Pista</div>
+            </div>
+        </div>
+
     </div>
-
-    <div class="itinerary">
-        <h2>Programa del Día</h2>
-        <div class="timeline-item">
-            <div class="timeline-time">18:00 CEREMONIA</div>
-            <div class="timeline-desc">Misa de acción de gracias.</div>
-        </div>
-        <div class="timeline-item">
-            <div class="timeline-time">20:00 RECEPCIÓN</div>
-            <div class="timeline-desc">Llegada al salón en CDMX.</div>
-        </div>
-        <div class="timeline-item">
-            <div class="timeline-time">21:00 CENA Y BRINDIS</div>
-            <div class="timeline-desc">Tiempo de celebrar y bailar.</div>
-        </div>
-    </div>
-
 </div>
 
 <script>
-    // Fecha objetivo: 23 de Octubre de 2026 a las 18:00 hrs
+    // Lógica para abrir el sobre
+    function openEnvelope() {
+        const envelope = document.getElementById('envelope');
+        const content = document.getElementById('invitation-content');
+        
+        // Añade la clase para activar la animación CSS
+        envelope.classList.add('open');
+        
+        // Hace visible el contenido interno con un fade-in
+        setTimeout(() => {
+            content.classList.add('visible');
+        }, 300); // Pequeño retraso para que empiece mientras se abre el sobre
+    }
+
+    // Lógica de Cuenta Regresiva
     const countDownDate = new Date("Oct 23, 2026 18:00:00").getTime();
 
-    const x = setInterval(function() {
+    const timerInterval = setInterval(function() {
         const now = new Date().getTime();
         const distance = countDownDate - now;
 
@@ -330,14 +571,14 @@
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
-        document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
-        document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
-        document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+        document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+        document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+        document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+        document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
 
         if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("countdown").innerHTML = "<div style='font-family: Playfair Display, serif; font-size: 1.5rem; color: #D4AF37;'>¡Llegó el gran día!</div>";
+            clearInterval(timerInterval);
+            document.getElementById("countdown").innerHTML = "<div style='font-family: Cormorant Garamond, serif; font-size: 2rem; color: #D4AF37;'>¡Es Hoy!</div>";
         }
     }, 1000);
 </script>
