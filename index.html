@@ -21,7 +21,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--lilac-soft); /* Fondo suave detrás de la invitación */
+            background-color: var(--lilac-soft);
             overflow-x: hidden;
         }
 
@@ -29,7 +29,7 @@
            ANIMACIÓN DEL SOBRE Y SELLO (PANTALLA COMPLETA)
            ========================================= */
         #envelope {
-            position: fixed; /* Fijo para abarcar toda la ventana */
+            position: fixed; 
             top: 0; 
             left: 0; 
             width: 100vw; 
@@ -49,7 +49,7 @@
             width: 50%;
             height: 100%;
             background-color: #FDFDFD;
-            background-image: url('https://www.transparenttextures.com/patterns/watercolor.png'); /* Textura sutil de papel */
+            background-image: url('https://www.transparenttextures.com/patterns/watercolor.png');
             position: absolute;
             top: 0;
             transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1), opacity 1.5s ease;
@@ -70,14 +70,13 @@
             z-index: 1;
         }
 
-        /* Flores en el sobre derecho (Ajustadas a pantalla completa) */
         .envelope-flowers {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Asegura que llene el espacio sin distorsionarse */
+            object-fit: cover; 
             opacity: 0.85;
             pointer-events: none;
         }
@@ -108,10 +107,9 @@
             transform: translate(-50%, -50%) scale(0.3);
         }
 
-        /* Texto curvo SVG */
         .curved-text-svg {
             position: absolute;
-            width: 260px; /* Un poco más grande para mejor lectura */
+            width: 260px; 
             height: 260px;
             pointer-events: none;
             animation: spinText 20s linear infinite;
@@ -129,7 +127,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Diseño del Sello de Cera */
         .wax-seal {
             width: 90px;
             height: 90px;
@@ -162,7 +159,7 @@
            CONTENEDOR DE LA INVITACIÓN
            ========================================= */
         .app-container {
-            max-width: 500px; /* Ancho elegante para escritorio y celular */
+            max-width: 500px;
             margin: 0 auto;
             background-color: var(--bg-color);
             min-height: 100vh;
@@ -183,7 +180,6 @@
             transform: translateY(0);
         }
 
-        /* Tipografías y estilos generales */
         .gold-text {
             background: var(--gold-gradient);
             -webkit-background-clip: text;
@@ -446,6 +442,46 @@
             font-weight: 500;
         }
 
+        /* =========================================
+           BOTÓN STICKY DE MÚSICA
+           ========================================= */
+        .audio-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 10000;
+            padding: 10px 18px;
+            background: rgba(250, 250, 250, 0.85);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            color: var(--lilac-dark);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px);
+        }
+
+        .audio-btn.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .audio-btn:hover {
+            background: var(--lilac-dark);
+            color: var(--text-light);
+            border-color: var(--lilac-dark);
+        }
+
         /* Scrollbar */
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: var(--bg-color); }
@@ -453,6 +489,12 @@
     </style>
 </head>
 <body>
+
+<audio id="bg-music" loop>
+    <source src="assets/song.mp3" type="audio/mpeg">
+</audio>
+
+<button id="audio-btn" class="audio-btn" onclick="toggleAudio()">PAUSAR</button>
 
 <div id="envelope">
     <div class="flap left"></div>
@@ -547,20 +589,45 @@
 </div>
 
 <script>
+    // Referencias a los elementos de audio
+    const bgMusic = document.getElementById('bg-music');
+    const audioBtn = document.getElementById('audio-btn');
+
+    // Función para abrir el sobre y reproducir la música
     function openEnvelope() {
         const envelope = document.getElementById('envelope');
         const content = document.getElementById('invitation-content');
         
         envelope.classList.add('open');
         
-        // Transición suave de entrada para el contenido
+        // Reproducir música y mostrar el botón
+        bgMusic.play().catch(error => {
+            console.log("El navegador bloqueó el autoplay de audio:", error);
+        });
+        
+        // Mostrar el botón de música
+        setTimeout(() => {
+            audioBtn.classList.add('visible');
+        }, 800);
+        
         setTimeout(() => {
             content.classList.add('visible');
-            // Hacer scroll hasta arriba para asegurarse de que empieza en la portada
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }, 300); 
     }
 
+    // Función para alternar entre Pausar y Reanudar
+    function toggleAudio() {
+        if (bgMusic.paused) {
+            bgMusic.play();
+            audioBtn.innerText = 'PAUSAR';
+        } else {
+            bgMusic.pause();
+            audioBtn.innerText = 'REANUDAR';
+        }
+    }
+
+    // Lógica de la cuenta regresiva
     const countDownDate = new Date("Oct 23, 2026 18:00:00").getTime();
 
     const timerInterval = setInterval(function() {
