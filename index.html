@@ -21,27 +21,19 @@
             margin: 0;
             padding: 0;
             font-family: 'Montserrat', sans-serif;
-            background-color: #1a1a1a; /* Fondo oscuro detrás de la invitación */
+            background-color: var(--lilac-soft); /* Fondo suave detrás de la invitación */
             overflow-x: hidden;
         }
 
-        /* Contenedor principal estilo móvil */
-        .app-container {
-            max-width: 420px;
-            margin: 0 auto;
-            background-color: var(--bg-color);
-            min-height: 100vh;
-            position: relative;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
-            overflow: hidden;
-        }
-
         /* =========================================
-           ANIMACIÓN DEL SOBRE Y SELLO (ENTRADA)
+           ANIMACIÓN DEL SOBRE Y SELLO (PANTALLA COMPLETA)
            ========================================= */
         #envelope {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed; /* Fijo para abarcar toda la ventana */
+            top: 0; 
+            left: 0; 
+            width: 100vw; 
+            height: 100vh;
             z-index: 9999;
             display: flex;
             pointer-events: auto;
@@ -61,29 +53,31 @@
             position: absolute;
             top: 0;
             transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1), opacity 1.5s ease;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            box-shadow: 0 0 25px rgba(0,0,0,0.15);
         }
 
         .flap.left { 
             left: 0; 
             border-right: 1px solid rgba(181, 153, 181, 0.3);
             transform-origin: left center;
+            z-index: 2;
         }
         
         .flap.right { 
             right: 0; 
             transform-origin: right center;
             overflow: hidden;
+            z-index: 1;
         }
 
-        /* Flores en el sobre derecho */
+        /* Flores en el sobre derecho (Ajustadas a pantalla completa) */
         .envelope-flowers {
             position: absolute;
-            top: 50%;
-            left: -30%;
-            transform: translateY(-50%);
-            width: 150%;
-            height: auto;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Asegura que llene el espacio sin distorsionarse */
             opacity: 0.85;
             pointer-events: none;
         }
@@ -117,31 +111,35 @@
         /* Texto curvo SVG */
         .curved-text-svg {
             position: absolute;
-            width: 220px;
-            height: 220px;
+            width: 260px; /* Un poco más grande para mejor lectura */
+            height: 260px;
             pointer-events: none;
             animation: spinText 20s linear infinite;
         }
 
         .curved-text-svg text {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 14px;
+            font-size: 13.5px;
             fill: var(--lilac-dark);
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             font-style: italic;
+        }
+
+        @keyframes spinText {
+            100% { transform: rotate(360deg); }
         }
 
         /* Diseño del Sello de Cera */
         .wax-seal {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             background: radial-gradient(circle at 30% 30%, #D1B8D1, #B599B5, #8A6E8A);
             border-radius: 50%;
             box-shadow: 
                 inset 0 0 5px rgba(255,255,255,0.4),
                 inset 2px 2px 5px rgba(255,255,255,0.5),
                 inset -3px -3px 8px rgba(0,0,0,0.3),
-                0 4px 10px rgba(0,0,0,0.2);
+                0 4px 15px rgba(0,0,0,0.3);
             position: relative;
             display: flex;
             align-items: center;
@@ -149,11 +147,10 @@
             border: 2px solid rgba(255,255,255,0.2);
         }
 
-        /* Grabado dorado dentro del sello */
         .wax-seal::after {
             content: 'A';
             font-family: 'Cormorant Garamond', serif;
-            font-size: 40px;
+            font-size: 45px;
             color: transparent;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
@@ -162,24 +159,31 @@
         }
 
         /* =========================================
-           CONTENIDO DE LA INVITACIÓN
+           CONTENEDOR DE LA INVITACIÓN
            ========================================= */
+        .app-container {
+            max-width: 500px; /* Ancho elegante para escritorio y celular */
+            margin: 0 auto;
+            background-color: var(--bg-color);
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+
         #invitation-content {
             opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 1.5s ease 0.5s, transform 1.5s ease 0.5s;
-            height: 100vh;
-            overflow-y: auto;
+            transform: translateY(20px);
+            transition: opacity 1.5s ease 0.6s, transform 1.5s ease 0.6s;
             overflow-x: hidden;
             background-color: var(--bg-color);
         }
 
         #invitation-content.visible {
             opacity: 1;
-            transform: scale(1);
+            transform: translateY(0);
         }
 
-        /* Tipografías aplicadas */
+        /* Tipografías y estilos generales */
         .gold-text {
             background: var(--gold-gradient);
             -webkit-background-clip: text;
@@ -222,7 +226,7 @@
             display: inline-block;
         }
 
-        /* Sección Foto (Arco Premium) */
+        /* Sección Foto */
         .photo-section {
             padding: 20px 30px;
             text-align: center;
@@ -230,11 +234,11 @@
 
         .photo-arch {
             width: 100%;
-            height: 450px;
+            height: 500px;
             object-fit: cover;
-            border-radius: 200px 200px 0 0;
+            border-radius: 250px 250px 0 0;
             box-shadow: 0 15px 25px rgba(0,0,0,0.1);
-            border: 1px solid rgba(191, 149, 63, 0.3); /* Borde dorado tenue */
+            border: 1px solid rgba(191, 149, 63, 0.3); 
         }
 
         .verse {
@@ -247,7 +251,7 @@
             padding: 0 20px;
         }
 
-        /* Sección Calendario y Cuenta Regresiva */
+        /* Cuenta Regresiva y Calendario */
         .calendar-section {
             background-color: var(--lilac-dark);
             padding: 60px 20px;
@@ -300,7 +304,6 @@
             opacity: 0.8;
         }
 
-        /* Calendario Premium */
         .calendar-header {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.8rem;
@@ -321,7 +324,7 @@
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             gap: 8px;
-            max-width: 300px;
+            max-width: 320px;
             margin: 0 auto 40px auto;
             font-size: 0.85rem;
         }
@@ -342,7 +345,7 @@
         }
 
         .day.highlight::before {
-            content: '♥'; /* Corazón en lugar de círculo para ser más premium, o círculo dorado */
+            content: '♥';
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
@@ -366,12 +369,11 @@
             z-index: -2;
         }
 
-        /* Botón Premium */
         .btn {
             display: inline-block;
             padding: 15px 40px;
             background: transparent;
-            border: 1px solid #D4AF37; /* Base gold */
+            border: 1px solid #D4AF37;
             border-image: var(--gold-gradient) 1;
             color: var(--text-light);
             text-decoration: none;
@@ -381,6 +383,7 @@
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .btn::before {
@@ -443,7 +446,7 @@
             font-weight: 500;
         }
 
-        /* Scrollbar styling para un look más limpio */
+        /* Scrollbar */
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: var(--bg-color); }
         ::-webkit-scrollbar-thumb { background: var(--lilac-main); }
@@ -451,25 +454,24 @@
 </head>
 <body>
 
-<div class="app-container">
-
-    <div id="envelope">
-        <div class="flap left"></div>
-        <div class="flap right">
-            <img src="https://images.unsplash.com/photo-1572455857811-045fb4255b5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Flores" class="envelope-flowers" style="mix-blend-mode: multiply; filter: grayscale(20%) sepia(20%) hue-rotate(250deg) saturate(150%);">
-        </div>
-        
-        <div class="seal-wrapper" onclick="openEnvelope()">
-            <svg class="curved-text-svg" viewBox="0 0 200 200">
-                <path id="curve-path" d="M 40 100 A 60 60 0 1 1 40 100.01" fill="transparent" />
-                <text>
-                    <textPath href="#curve-path" startOffset="10%">Clic aquí para abrir • Clic aquí para abrir •</textPath>
-                </text>
-            </svg>
-            <div class="wax-seal"></div>
-        </div>
+<div id="envelope">
+    <div class="flap left"></div>
+    <div class="flap right">
+        <img src="https://images.unsplash.com/photo-1572455857811-045fb4255b5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Flores" class="envelope-flowers" style="mix-blend-mode: multiply; filter: grayscale(20%) sepia(20%) hue-rotate(250deg) saturate(150%);">
     </div>
+    
+    <div class="seal-wrapper" onclick="openEnvelope()">
+        <svg class="curved-text-svg" viewBox="0 0 200 200">
+            <path id="curve-path" d="M 40 100 A 60 60 0 1 1 40 100.01" fill="transparent" />
+            <text>
+                <textPath href="#curve-path" startOffset="10%">Clic aquí para abrir • Clic aquí para abrir •</textPath>
+            </text>
+        </svg>
+        <div class="wax-seal"></div>
+    </div>
+</div>
 
+<div class="app-container">
     <div id="invitation-content">
         
         <div class="hero">
@@ -545,21 +547,20 @@
 </div>
 
 <script>
-    // Lógica para abrir el sobre
     function openEnvelope() {
         const envelope = document.getElementById('envelope');
         const content = document.getElementById('invitation-content');
         
-        // Añade la clase para activar la animación CSS
         envelope.classList.add('open');
         
-        // Hace visible el contenido interno con un fade-in
+        // Transición suave de entrada para el contenido
         setTimeout(() => {
             content.classList.add('visible');
-        }, 300); // Pequeño retraso para que empiece mientras se abre el sobre
+            // Hacer scroll hasta arriba para asegurarse de que empieza en la portada
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 300); 
     }
 
-    // Lógica de Cuenta Regresiva
     const countDownDate = new Date("Oct 23, 2026 18:00:00").getTime();
 
     const timerInterval = setInterval(function() {
