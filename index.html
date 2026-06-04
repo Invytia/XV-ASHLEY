@@ -188,7 +188,7 @@
             display: inline-block;
         }
 
-        h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; text-align: center; }
+        h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; text-align: center; margin: 0; }
 
         /* Portada / Hero */
         .hero {
@@ -224,7 +224,7 @@
 
         /* Sección Foto */
         .photo-section {
-            padding: 20px 30px;
+            padding: 20px 30px 0;
             text-align: center;
         }
 
@@ -245,6 +245,68 @@
             margin: 30px 0;
             line-height: 1.4;
             padding: 0 20px;
+        }
+
+        /* Secciones de Información adicionales */
+        .info-section {
+            padding: 40px 30px;
+            text-align: center;
+            background-color: var(--bg-color);
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--lilac-dark);
+            margin-bottom: 20px;
+        }
+
+        .parents-names {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin: 10px 0 25px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            line-height: 1.5;
+        }
+
+        /* Tarjetas de Ubicación */
+        .location-card {
+            background: white;
+            border: 1px solid var(--lilac-soft);
+            padding: 35px 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .location-card::before {
+            content: '';
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px dashed var(--lilac-soft);
+            pointer-events: none;
+            border-radius: 5px;
+        }
+
+        .location-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .location-card p {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 25px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .icon-box {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
         }
 
         /* Cuenta Regresiva y Calendario */
@@ -371,7 +433,7 @@
             background: transparent;
             border: 1px solid #D4AF37;
             border-image: var(--gold-gradient) 1;
-            color: var(--text-light);
+            color: var(--text-dark);
             text-decoration: none;
             font-size: 0.75rem;
             letter-spacing: 3px;
@@ -380,6 +442,11 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
+            z-index: 1;
+        }
+
+        .calendar-section .btn {
+            color: var(--text-light);
         }
 
         .btn::before {
@@ -392,6 +459,7 @@
         }
 
         .btn:hover::before { opacity: 0.2; }
+        .calendar-section .btn:hover::before { opacity: 0.3; }
 
         /* Itinerario */
         .itinerary {
@@ -519,15 +587,27 @@
         <div class="hero">
             <div class="subtitle">MIS XV AÑOS</div>
             <h1 class="gold-text">Ashley</h1>
-            <div class="subtitle" style="margin-top: 10px; font-size: 0.7rem;">CARRASCO ACOSTA</div>
+            <div class="subtitle" style="margin-top: 10px; font-size: 0.7rem;">CARRASCO A</div>
             <div class="date">23 • 10 • 2026</div>
         </div>
 
         <div class="photo-section">
             <div class="verse">
-                "Con la bendición y el amor de Dios, él escribió nuestra historia, y queremos que seas parte de este hermoso día."
+                "Con mucha ilusión y alegría, quiero compartir con vos un momento muy especial en mi vida. Ha llegado el día que cumpliré mis XV años y sería un honor que me acompañes para celebrarlo juntos."
             </div>
             <img src="https://images.unsplash.com/photo-1517630713740-8bd71427181c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Ashley" class="photo-arch">
+        </div>
+
+        <div class="info-section">
+            <h2 class="section-title" style="font-size: 1.8rem;">Con la bendición de Dios y de mi madre</h2>
+            <div class="parents-names">
+                N. Abigail Acosta A
+            </div>
+            
+            <h2 class="section-title" style="font-size: 1.8rem; margin-top: 40px;">Y mis padrinos</h2>
+            <div class="parents-names">
+                Karen Guadalupe Guzmán G<br>&<br>Sergio Salvador García Vera
+            </div>
         </div>
 
         <div class="calendar-section">
@@ -583,6 +663,48 @@
                 <div class="timeline-time">22:30</div>
                 <div class="timeline-title">Apertura de Pista</div>
             </div>
+        </div>
+
+        <div class="info-section" style="padding-top: 10px;">
+            <h2 class="section-title">Ubicaciones</h2>
+            
+            <div class="location-card">
+                <div class="icon-box">⛪</div>
+                <h3>Cristo Salvador</h3>
+                <p>
+                    <strong>Ceremonia Religiosa</strong><br>
+                    Acueducto Guadalupe Av.Escollera s/n<br>Alcaldía Gustavo A Madero. C.P 07270
+                </p>
+                <a href="https://www.google.com/maps/search/?api=1&query=Parroquia+Cristo+Salvador+Acueducto+Guadalupe+Av+Escollera+Gustavo+A+Madero+07270" target="_blank" class="btn">VER MAPA</a>
+            </div>
+
+            <div class="location-card">
+                <div class="icon-box">🥂</div>
+                <h3>Salón Paraíso Casa De Piedra</h3>
+                <p>
+                    <strong>Recepción</strong><br>
+                    Te esperamos para continuar celebrando juntos.
+                </p>
+                <a href="https://www.google.com/search?client=safari&hs=v20p&sca_esv=9111c760d8c2668c&hl=es-mx&sxsrf=ANbL-n7CDYQ57qLTmIv43PXKnyXLGOW22Q%3A1780590002540&kgmid=%2Fg%2F11g0v_ckwt&q=Sal%C3%B3n%20Paraiso%20Casa%20De%20Piedra&shem=rimspwouoe%2Crimspwouohe&shndl=30&source=sh%2Fx%2Floc%2Fact%2Fm4%2F3" target="_blank" class="btn">VER MAPA</a>
+            </div>
+        </div>
+
+        <div class="info-section" style="background-color: var(--lilac-soft); padding: 50px 30px;">
+            <div class="icon-box">👗</div>
+            <h2 class="section-title" style="margin-bottom: 10px;">Código de Vestimenta</h2>
+            <h3 class="gold-text" style="font-size: 1.5rem; letter-spacing: 5px; font-family: 'Montserrat', sans-serif; font-weight: 500;">FORMAL</h3>
+        </div>
+
+        <div class="info-section" style="padding-bottom: 80px;">
+            <div class="icon-box">✉️</div>
+            <h2 class="section-title">Mesa de Regalos</h2>
+            <p style="font-size: 0.95rem; line-height: 1.6; color: #555; margin-bottom: 20px;">
+                El mejor regalo es tu presencia en este día tan especial, pero si deseas tener un detalle conmigo, contaremos con la dinámica de:
+            </p>
+            <h3 class="gold-text" style="font-size: 2.2rem; font-family: 'Cormorant Garamond', serif;">Lluvia de Sobres</h3>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 15px; font-style: italic;">
+                (Se colocará un pequeño buzón en la recepción para depositar tu sobre)
+            </p>
         </div>
 
     </div>
