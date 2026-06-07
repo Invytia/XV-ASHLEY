@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XV Años Ashley - Invitación Premium</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Great+Vibes&family=Pinyon+Script&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Great+Vibes&family=Pinyon+Script&family=Tangerine:wght@400;700&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --lilac-soft: #E8DCE8;
@@ -139,15 +139,20 @@
             border: 2px solid rgba(255,255,255,0.2);
         }
 
+        /* A mayúscula serif clara, no cursiva */
         .wax-seal::after {
             content: 'A';
             font-family: 'Cormorant Garamond', serif;
-            font-size: 45px;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 48px;
+            line-height: 1;
             color: transparent;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             background-clip: text;
             filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
+            letter-spacing: 0;
         }
 
         .app-container {
@@ -197,11 +202,12 @@
         }
 
         .hero h1 {
-            font-size: 3.8rem;
+            font-size: 5.5rem;
             margin: 10px 0;
             line-height: 1.3;
             padding: 10px 10px 15px;
-            font-family: 'Great Vibes', cursive;
+            font-family: 'Tangerine', cursive;
+            font-weight: 700;
             font-style: normal;
             overflow: visible;
             white-space: nowrap;
@@ -254,14 +260,16 @@
             margin-bottom: 20px;
         }
 
+        /* Nombres en Cormorant Garamond serif, NO manuscrita */
         .parents-names {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             color: var(--text-dark);
             margin: 10px 0 25px;
             font-weight: 400;
             letter-spacing: 1px;
             line-height: 1.8;
-            font-family: 'Pinyon Script', cursive;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
         }
 
         .location-card {
@@ -543,7 +551,6 @@
         ::-webkit-scrollbar-track { background: var(--bg-color); }
         ::-webkit-scrollbar-thumb { background: var(--lilac-main); }
 
-        /* Galería */
         .gallery-section {
             padding: 60px 30px;
             background-color: var(--bg-color);
@@ -791,9 +798,10 @@
         }
 
         .closing-name {
-            font-family: 'Great Vibes', cursive;
+            font-family: 'Tangerine', cursive;
+            font-weight: 700;
             font-style: normal;
-            font-size: 4rem;
+            font-size: 5.5rem;
             line-height: 1.3;
             padding: 10px 10px 20px;
             background: var(--gold-gradient);
@@ -893,7 +901,7 @@
             
             <h2 class="section-title" style="font-size: 1.8rem; margin-top: 40px;">Y mis padrinos</h2>
             <div class="parents-names">
-                Karen Guadalupe Guzmán G<br>&<br>Sergio Salvador García Vera
+                Karen Guadalupe Guzmán G<br>&<br>Sergio Salvador García V
             </div>
         </div>
 
