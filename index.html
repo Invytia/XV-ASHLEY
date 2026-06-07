@@ -202,15 +202,16 @@
         }
 
         .hero h1 {
-            font-size: 5.5rem;
+            font-size: clamp(2.8rem, 13vw, 5.5rem);
             margin: 10px 0;
-            line-height: 1.3;
+            line-height: 1.2;
             padding: 10px 10px 15px;
             font-family: 'Tangerine', cursive;
             font-weight: 700;
             font-style: normal;
             overflow: visible;
-            white-space: nowrap;
+            white-space: normal;
+            word-break: keep-all;
         }
 
         .hero .date {
@@ -801,7 +802,7 @@
             font-family: 'Tangerine', cursive;
             font-weight: 700;
             font-style: normal;
-            font-size: 5.5rem;
+            font-size: clamp(2.8rem, 13vw, 5.5rem);
             line-height: 1.3;
             padding: 10px 10px 20px;
             background: var(--gold-gradient);
@@ -810,7 +811,7 @@
             color: transparent;
             display: block;
             overflow: visible;
-            white-space: nowrap;
+            white-space: normal;
         }
 
         .closing-roman {
@@ -901,7 +902,7 @@
             
             <h2 class="section-title" style="font-size: 1.8rem; margin-top: 40px;">Y mis padrinos</h2>
             <div class="parents-names">
-                Karen Guadalupe Guzmán G<br>&<br>Sergio Salvador García V
+                Karen Guadalupe Guzmán G<br>&<br>Sergio Salvador García Vera
             </div>
         </div>
 
