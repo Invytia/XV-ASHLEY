@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Paleta Premium */
             --lilac-soft: #E8DCE8;
             --lilac-main: #B599B5;
             --lilac-dark: #6B4E6B;
@@ -25,9 +24,6 @@
             overflow-x: hidden;
         }
 
-        /* =========================================
-           ANIMACIÓN DEL SOBRE Y SELLO (PANTALLA COMPLETA)
-           ========================================= */
         #envelope {
             position: fixed; 
             top: 0; 
@@ -84,7 +80,6 @@
         #envelope.open .flap.left { transform: translateX(-100%); }
         #envelope.open .flap.right { transform: translateX(100%); }
 
-        /* Sello interactivo */
         .seal-wrapper {
             position: absolute;
             top: 50%;
@@ -155,9 +150,6 @@
             filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
         }
 
-        /* =========================================
-           CONTENEDOR DE LA INVITACIÓN
-           ========================================= */
         .app-container {
             max-width: 500px;
             margin: 0 auto;
@@ -190,7 +182,6 @@
 
         h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; text-align: center; margin: 0; }
 
-        /* Portada / Hero */
         .hero {
             padding: 80px 30px 40px;
             text-align: center;
@@ -222,7 +213,6 @@
             display: inline-block;
         }
 
-        /* Sección Foto */
         .photo-section {
             padding: 20px 30px 0;
             text-align: center;
@@ -247,7 +237,6 @@
             padding: 0 20px;
         }
 
-        /* Secciones de Información adicionales */
         .info-section {
             padding: 40px 30px;
             text-align: center;
@@ -269,7 +258,6 @@
             line-height: 1.5;
         }
 
-        /* Tarjetas de Ubicación */
         .location-card {
             background: white;
             border: 1px solid var(--lilac-soft);
@@ -309,7 +297,6 @@
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
         }
 
-        /* Cuenta Regresiva y Calendario */
         .calendar-section {
             background-color: var(--lilac-dark);
             padding: 60px 20px;
@@ -461,7 +448,6 @@
         .btn:hover::before { opacity: 0.2; }
         .calendar-section .btn:hover::before { opacity: 0.3; }
 
-        /* Itinerario */
         .itinerary {
             padding: 70px 30px;
             background-color: var(--bg-color);
@@ -510,9 +496,6 @@
             font-weight: 500;
         }
 
-        /* =========================================
-           BOTÓN STICKY DE MÚSICA
-           ========================================= */
         .audio-btn {
             position: fixed;
             bottom: 25px;
@@ -550,10 +533,322 @@
             border-color: var(--lilac-dark);
         }
 
-        /* Scrollbar */
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: var(--bg-color); }
         ::-webkit-scrollbar-thumb { background: var(--lilac-main); }
+
+        /* =========================================
+           NUEVAS SECCIONES
+           ========================================= */
+
+        /* Galería */
+        .gallery-section {
+            padding: 60px 30px;
+            background-color: var(--bg-color);
+            text-align: center;
+        }
+
+        .gallery-section h2 {
+            font-size: 2.2rem;
+            color: var(--lilac-dark);
+            margin-bottom: 30px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 12px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid rgba(191, 149, 63, 0.25);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.07);
+            background: var(--lilac-soft);
+        }
+
+        .gallery-item:first-child {
+            grid-column: 1 / -1;
+            height: 280px;
+        }
+
+        .gallery-item:not(:first-child) {
+            height: 180px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.04);
+        }
+
+        /* Placeholder estado vacío en galería */
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: var(--lilac-main);
+        }
+
+        .gallery-placeholder span {
+            font-size: 1.8rem;
+            opacity: 0.5;
+        }
+
+        .gallery-placeholder p {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--lilac-main);
+            opacity: 0.6;
+            margin: 0;
+        }
+
+        /* Frase sin título */
+        .quote-section {
+            padding: 60px 40px;
+            background-color: var(--lilac-soft);
+            text-align: center;
+            position: relative;
+        }
+
+        .quote-section::before,
+        .quote-section::after {
+            content: '';
+            position: absolute;
+            left: 30px; right: 30px; height: 1px;
+            background: linear-gradient(to right, transparent, rgba(191,149,63,0.4), transparent);
+        }
+
+        .quote-section::before { top: 0; }
+        .quote-section::after { bottom: 0; }
+
+        .quote-ornament {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            line-height: 0.5;
+            color: transparent;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            opacity: 0.5;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .quote-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-style: italic;
+            color: var(--lilac-dark);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Confirmación */
+        .rsvp-section {
+            padding: 60px 30px;
+            background-color: var(--bg-color);
+            text-align: center;
+        }
+
+        .rsvp-section h2 {
+            font-size: 2.2rem;
+            color: var(--lilac-dark);
+            margin-bottom: 10px;
+        }
+
+        .rsvp-section .rsvp-sub {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--lilac-main);
+            margin-bottom: 35px;
+            display: block;
+        }
+
+        .rsvp-input-wrapper {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .rsvp-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid var(--lilac-soft);
+            border-bottom: 1px solid var(--lilac-main);
+            background: transparent;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            outline: none;
+            box-sizing: border-box;
+            border-radius: 0;
+            text-align: center;
+            letter-spacing: 1px;
+            transition: border-color 0.3s ease;
+            -webkit-appearance: none;
+            border-radius: 4px;
+        }
+
+        .rsvp-input::placeholder {
+            color: var(--lilac-main);
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        .rsvp-input:focus {
+            border-color: var(--lilac-dark);
+            border-bottom-color: #D4AF37;
+        }
+
+        .rsvp-btn-wa {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 40px;
+            background: transparent;
+            border: 1px solid #D4AF37;
+            border-image: var(--gold-gradient) 1;
+            color: var(--text-dark);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            width: 100%;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        .rsvp-btn-wa::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--gold-gradient);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .rsvp-btn-wa:hover::before { opacity: 0.15; }
+
+        .rsvp-btn-wa svg {
+            width: 18px; height: 18px;
+            flex-shrink: 0;
+        }
+
+        /* Cierre */
+        .closing-section {
+            background-color: var(--lilac-dark);
+            padding: 80px 30px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .closing-section::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: var(--gold-gradient);
+        }
+
+        .closing-section::after {
+            content: '';
+            position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+            background: var(--gold-gradient);
+        }
+
+        .closing-bg-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 10rem;
+            color: rgba(255,255,255,0.03);
+            white-space: nowrap;
+            pointer-events: none;
+            letter-spacing: -5px;
+        }
+
+        .closing-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .closing-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            line-height: 1;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .closing-roman {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            letter-spacing: 6px;
+            color: rgba(255,255,255,0.5);
+            margin-top: 20px;
+            display: block;
+        }
+
+        .closing-divider {
+            width: 60px;
+            height: 1px;
+            background: var(--gold-gradient);
+            margin: 25px auto;
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: #1A1A1A;
+            padding: 20px 30px;
+            text-align: center;
+        }
+
+        .site-footer span {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.25);
+        }
+
+        .site-footer span strong {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 400;
+        }
     </style>
 </head>
 <body>
@@ -706,27 +1001,115 @@
             </p>
         </div>
 
+        <!-- ========================
+             GALERÍA DE FOTOS
+             ======================== -->
+        <div class="gallery-section">
+            <h2 class="section-title">Galería</h2>
+            <div class="gallery-grid">
+                <!-- Foto grande (principal) -->
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <span>🌸</span>
+                        <p>Foto principal</p>
+                    </div>
+                    <!-- Para activar: quita el div.gallery-placeholder y descomenta la siguiente línea -->
+                    <!-- <img src="ruta-a-tu-foto-1.jpg" alt="Ashley XV Años"> -->
+                </div>
+                <!-- Foto 2 -->
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <span>🌸</span>
+                        <p>Foto 2</p>
+                    </div>
+                    <!-- <img src="ruta-a-tu-foto-2.jpg" alt="Ashley XV Años"> -->
+                </div>
+                <!-- Foto 3 -->
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <span>🌸</span>
+                        <p>Foto 3</p>
+                    </div>
+                    <!-- <img src="ruta-a-tu-foto-3.jpg" alt="Ashley XV Años"> -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================
+             FRASE SIN TÍTULO
+             ======================== -->
+        <div class="quote-section">
+            <span class="quote-ornament">"</span>
+            <p class="quote-text">
+                Con mucha ilusión y alegría, quiero compartir con vos<br>
+                un momento muy especial en mi vida.<br><br>
+                Ha llegado el día que cumpliré mis XV años<br>
+                y sería un honor que me acompañes<br>
+                para celebrarlo juntos.
+            </p>
+        </div>
+
+        <!-- ========================
+             CONFIRMACIÓN VÍA WHATSAPP
+             ======================== -->
+        <div class="rsvp-section">
+            <h2 class="section-title">Confirmación</h2>
+            <span class="rsvp-sub">¿Nos acompañas?</span>
+
+            <div class="rsvp-input-wrapper">
+                <input 
+                    type="text" 
+                    id="rsvp-name" 
+                    class="rsvp-input" 
+                    placeholder="Escribe tu nombre aquí"
+                    autocomplete="off"
+                >
+            </div>
+
+            <a id="rsvp-wa-btn" class="rsvp-btn-wa" onclick="confirmRSVP(event)">
+                <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.025.507 3.936 1.395 5.617L0 24l6.545-1.371A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.003-1.371l-.358-.214-3.883.814.829-3.773-.235-.379A9.818 9.818 0 1112 21.818z"/>
+                </svg>
+                CONFIRMAR ASISTENCIA
+            </a>
+        </div>
+
+        <!-- ========================
+             SECCIÓN DE CIERRE
+             ======================== -->
+        <div class="closing-section">
+            <div class="closing-bg-text">XV</div>
+            <span class="closing-label">Mis XV Años</span>
+            <span class="closing-name">Ashley</span>
+            <div class="closing-divider"></div>
+            <span class="closing-roman">XXIII · X · MMXXVI</span>
+        </div>
+
+        <!-- ========================
+             PIE DE PÁGINA
+             ======================== -->
+        <footer class="site-footer">
+            <span>Diseñado con amor por <strong>INVYTIA</strong></span>
+        </footer>
+
     </div>
 </div>
 
 <script>
-    // Referencias a los elementos de audio
     const bgMusic = document.getElementById('bg-music');
     const audioBtn = document.getElementById('audio-btn');
 
-    // Función para abrir el sobre y reproducir la música
     function openEnvelope() {
         const envelope = document.getElementById('envelope');
         const content = document.getElementById('invitation-content');
         
         envelope.classList.add('open');
         
-        // Reproducir música y mostrar el botón
         bgMusic.play().catch(error => {
             console.log("El navegador bloqueó el autoplay de audio:", error);
         });
         
-        // Mostrar el botón de música
         setTimeout(() => {
             audioBtn.classList.add('visible');
         }, 800);
@@ -737,7 +1120,6 @@
         }, 300); 
     }
 
-    // Función para alternar entre Pausar y Reanudar
     function toggleAudio() {
         if (bgMusic.paused) {
             bgMusic.play();
@@ -748,7 +1130,22 @@
         }
     }
 
-    // Lógica de la cuenta regresiva
+    function confirmRSVP(e) {
+        e.preventDefault();
+        const name = document.getElementById('rsvp-name').value.trim();
+        const phone = '525543048842';
+        let message;
+
+        if (name) {
+            message = `Hola! Soy ${name} y confirmo mi asistencia a los XV Años de Ashley el 23 de octubre de 2026 🌸`;
+        } else {
+            message = `Hola! Confirmo mi asistencia a los XV Años de Ashley el 23 de octubre de 2026 🌸`;
+        }
+
+        const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
+    }
+
     const countDownDate = new Date("Oct 23, 2026 18:00:00").getTime();
 
     const timerInterval = setInterval(function() {
