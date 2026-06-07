@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XV Años Ashley - Invitación Premium</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --lilac-soft: #E8DCE8;
@@ -199,7 +199,11 @@
         .hero h1 {
             font-size: 4.5rem;
             margin: 10px 0;
-            line-height: 1;
+            line-height: 1.3;
+            padding: 10px 10px 15px;
+            font-family: 'Great Vibes', cursive;
+            font-style: normal;
+            overflow: visible;
         }
 
         .hero .date {
@@ -250,12 +254,13 @@
         }
 
         .parents-names {
-            font-size: 1rem;
+            font-size: 1.6rem;
             color: var(--text-dark);
             margin: 10px 0 25px;
-            font-weight: 300;
+            font-weight: 400;
             letter-spacing: 1px;
-            line-height: 1.5;
+            line-height: 1.6;
+            font-family: 'Great Vibes', cursive;
         }
 
         .location-card {
@@ -537,21 +542,11 @@
         ::-webkit-scrollbar-track { background: var(--bg-color); }
         ::-webkit-scrollbar-thumb { background: var(--lilac-main); }
 
-        /* =========================================
-           NUEVAS SECCIONES
-           ========================================= */
-
         /* Galería */
         .gallery-section {
             padding: 60px 30px;
             background-color: var(--bg-color);
             text-align: center;
-        }
-
-        .gallery-section h2 {
-            font-size: 2.2rem;
-            color: var(--lilac-dark);
-            margin-bottom: 30px;
         }
 
         .gallery-grid {
@@ -591,7 +586,6 @@
             transform: scale(1.04);
         }
 
-        /* Placeholder estado vacío en galería */
         .gallery-placeholder {
             width: 100%;
             height: 100%;
@@ -617,7 +611,6 @@
             margin: 0;
         }
 
-        /* Frase sin título */
         .quote-section {
             padding: 60px 40px;
             background-color: var(--lilac-soft);
@@ -658,7 +651,6 @@
             margin: 0;
         }
 
-        /* Confirmación */
         .rsvp-section {
             padding: 60px 30px;
             background-color: var(--bg-color);
@@ -696,7 +688,6 @@
             color: var(--text-dark);
             outline: none;
             box-sizing: border-box;
-            border-radius: 0;
             text-align: center;
             letter-spacing: 1px;
             transition: border-color 0.3s ease;
@@ -755,7 +746,6 @@
             flex-shrink: 0;
         }
 
-        /* Cierre */
         .closing-section {
             background-color: var(--lilac-dark);
             padding: 80px 30px 60px;
@@ -800,7 +790,8 @@
         }
 
         .closing-name {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Great Vibes', cursive;
+            font-style: normal;
             font-size: 5rem;
             line-height: 1;
             background: var(--gold-gradient);
@@ -827,7 +818,6 @@
             margin: 25px auto;
         }
 
-        /* Footer */
         .site-footer {
             background-color: #1A1A1A;
             padding: 20px 30px;
@@ -922,7 +912,6 @@
             
             <div class="calendar-grid">
                 <div class="day-name">LUN</div><div class="day-name">MAR</div><div class="day-name">MIE</div><div class="day-name">JUE</div><div class="day-name">VIE</div><div class="day-name">SAB</div><div class="day-name">DOM</div>
-                
                 <div></div><div></div><div></div>
                 <div class="day">1</div><div class="day">2</div><div class="day">3</div><div class="day">4</div>
                 <div class="day">5</div><div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day">9</div><div class="day">10</div><div class="day">11</div>
@@ -948,7 +937,6 @@
                 <div class="timeline-time">19:00</div>
                 <div class="timeline-title">Recepción de Invitados</div>
             </div>
-            
         </div>
 
         <div class="info-section" style="padding-top: 10px;">
@@ -992,43 +980,30 @@
             </p>
         </div>
 
-        <!-- ========================
-             GALERÍA DE FOTOS
-             ======================== -->
         <div class="gallery-section">
             <h2 class="section-title">Galería</h2>
             <div class="gallery-grid">
-                <!-- Foto grande (principal) -->
                 <div class="gallery-item">
                     <div class="gallery-placeholder">
                         <span>🌸</span>
                         <p>Foto principal</p>
                     </div>
-                    <!-- Para activar: quita el div.gallery-placeholder y descomenta la siguiente línea -->
-                    <!-- <img src="ruta-a-tu-foto-1.jpg" alt="Ashley XV Años"> -->
                 </div>
-                <!-- Foto 2 -->
                 <div class="gallery-item">
                     <div class="gallery-placeholder">
                         <span>🌸</span>
                         <p>Foto 2</p>
                     </div>
-                    <!-- <img src="ruta-a-tu-foto-2.jpg" alt="Ashley XV Años"> -->
                 </div>
-                <!-- Foto 3 -->
                 <div class="gallery-item">
                     <div class="gallery-placeholder">
                         <span>🌸</span>
                         <p>Foto 3</p>
                     </div>
-                    <!-- <img src="ruta-a-tu-foto-3.jpg" alt="Ashley XV Años"> -->
                 </div>
             </div>
         </div>
 
-        <!-- ========================
-             FRASE SIN TÍTULO
-             ======================== -->
         <div class="quote-section">
             <span class="quote-ornament">"</span>
             <p class="quote-text">
@@ -1040,9 +1015,6 @@
             </p>
         </div>
 
-        <!-- ========================
-             CONFIRMACIÓN VÍA WHATSAPP
-             ======================== -->
         <div class="rsvp-section">
             <h2 class="section-title">Confirmación</h2>
             <span class="rsvp-sub">¿Nos acompañas?</span>
@@ -1066,9 +1038,6 @@
             </a>
         </div>
 
-        <!-- ========================
-             SECCIÓN DE CIERRE
-             ======================== -->
         <div class="closing-section">
             <div class="closing-bg-text">XV</div>
             <span class="closing-label">Mis XV Años</span>
@@ -1077,9 +1046,6 @@
             <span class="closing-roman">XXIII · X · MMXXVI</span>
         </div>
 
-        <!-- ========================
-             PIE DE PÁGINA
-             ======================== -->
         <footer class="site-footer">
             <span>Diseñado con amor por <strong>INVYTIA</strong></span>
         </footer>
@@ -1094,69 +1060,40 @@
     function openEnvelope() {
         const envelope = document.getElementById('envelope');
         const content = document.getElementById('invitation-content');
-        
         envelope.classList.add('open');
-        
-        bgMusic.play().catch(error => {
-            console.log("El navegador bloqueó el autoplay de audio:", error);
-        });
-        
-        setTimeout(() => {
-            audioBtn.classList.add('visible');
-        }, 800);
-        
-        setTimeout(() => {
-            content.classList.add('visible');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }, 300); 
+        bgMusic.play().catch(error => console.log("Autoplay bloqueado:", error));
+        setTimeout(() => { audioBtn.classList.add('visible'); }, 800);
+        setTimeout(() => { content.classList.add('visible'); window.scrollTo({ top: 0, behavior: 'smooth' }); }, 300); 
     }
 
     function toggleAudio() {
-        if (bgMusic.paused) {
-            bgMusic.play();
-            audioBtn.innerText = 'PAUSAR';
-        } else {
-            bgMusic.pause();
-            audioBtn.innerText = 'REANUDAR';
-        }
+        if (bgMusic.paused) { bgMusic.play(); audioBtn.innerText = 'PAUSAR'; }
+        else { bgMusic.pause(); audioBtn.innerText = 'REANUDAR'; }
     }
 
     function confirmRSVP(e) {
         e.preventDefault();
         const name = document.getElementById('rsvp-name').value.trim();
         const phone = '525543048842';
-        let message;
-
-        if (name) {
-            message = `Hola! Soy ${name} y confirmo mi asistencia a los XV Años de Ashley el 23 de octubre de 2026 🌸`;
-        } else {
-            message = `Hola! Confirmo mi asistencia a los XV Años de Ashley el 23 de octubre de 2026 🌸`;
-        }
-
-        const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-        window.open(url, '_blank');
+        const message = name
+            ? `Hola! Soy ${name} y confirmo mi asistencia a los XV Años de Ashley el 23 de octubre de 2026 🌸`
+            : `Hola! Confirmo mi asistencia a los XV Años de Ashley el 23 de octubre de 2026 🌸`;
+        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
     }
 
     const countDownDate = new Date("Oct 23, 2026 18:00:00").getTime();
-
     const timerInterval = setInterval(function() {
-        const now = new Date().getTime();
-        const distance = countDownDate - now;
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-        document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-        document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
-        document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
-
+        const distance = countDownDate - new Date().getTime();
         if (distance < 0) {
             clearInterval(timerInterval);
             document.getElementById("countdown").innerHTML = "<div style='font-family: Cormorant Garamond, serif; font-size: 2rem; color: #D4AF37;'>¡Es Hoy!</div>";
+            return;
         }
+        const pad = n => n < 10 ? "0" + n : n;
+        document.getElementById("days").innerText    = pad(Math.floor(distance / 86400000));
+        document.getElementById("hours").innerText   = pad(Math.floor((distance % 86400000) / 3600000));
+        document.getElementById("minutes").innerText = pad(Math.floor((distance % 3600000) / 60000));
+        document.getElementById("seconds").innerText = pad(Math.floor((distance % 60000) / 1000));
     }, 1000);
 </script>
 
