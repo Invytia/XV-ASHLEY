@@ -7,10 +7,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Great+Vibes&family=Pinyon+Script&family=Tangerine:wght@400;700&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --lilac-soft: #E8DCE8;
-            --lilac-main: #B599B5;
-            --lilac-dark: #6B4E6B;
-            --gold-gradient: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            /* Paleta Blush Cobre */
+            --theme-soft: #FDF6F5; /* Blush muy suave para fondos */
+            --theme-main: #D8A79E; /* Blush medio */
+            --theme-dark: #9C5B4F; /* Cobre oscuro / terracota */
+            --theme-gradient: linear-gradient(135deg, #C77D63, #F5D3C4, #B87333, #FAE6DD, #8C5346);
             --bg-color: #FAFAFA;
             --text-dark: #2C2C2C;
             --text-light: #FFFFFF;
@@ -20,10 +21,25 @@
             margin: 0;
             padding: 0;
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--lilac-soft);
+            background-color: var(--theme-soft);
             overflow-x: hidden;
         }
 
+        /* --- SISTEMA DE ANIMACIONES (SCROLL) --- */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 1s cubic-bezier(0.165, 0.84, 0.44, 1), transform 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+
+        /* --- SOBRE Y SELLO --- */
         #envelope {
             position: fixed; 
             top: 0; 
@@ -54,7 +70,7 @@
 
         .flap.left { 
             left: 0; 
-            border-right: 1px solid rgba(181, 153, 181, 0.3);
+            border-right: 1px solid rgba(216, 167, 158, 0.3);
             transform-origin: left center;
             z-index: 2;
         }
@@ -75,6 +91,9 @@
             object-fit: cover; 
             opacity: 0.85;
             pointer-events: none;
+            /* Filtro para dar tono blush/cobre a la textura de flores */
+            mix-blend-mode: multiply; 
+            filter: grayscale(20%) sepia(30%) hue-rotate(340deg) saturate(160%);
         }
 
         #envelope.open .flap.left { transform: translateX(-100%); }
@@ -113,7 +132,7 @@
         .curved-text-svg text {
             font-family: 'Cormorant Garamond', serif;
             font-size: 13.5px;
-            fill: var(--lilac-dark);
+            fill: var(--theme-dark);
             letter-spacing: 3px;
             font-style: italic;
         }
@@ -125,7 +144,7 @@
         .wax-seal {
             width: 90px;
             height: 90px;
-            background: radial-gradient(circle at 30% 30%, #D1B8D1, #B599B5, #8A6E8A);
+            background: radial-gradient(circle at 30% 30%, #E2C2BD, #D8A79E, #A56457);
             border-radius: 50%;
             box-shadow: 
                 inset 0 0 5px rgba(255,255,255,0.4),
@@ -139,7 +158,6 @@
             border: 2px solid rgba(255,255,255,0.2);
         }
 
-        /* A mayúscula serif clara, no cursiva */
         .wax-seal::after {
             content: 'A';
             font-family: 'Cormorant Garamond', serif;
@@ -148,13 +166,14 @@
             font-size: 48px;
             line-height: 1;
             color: transparent;
-            background: var(--gold-gradient);
+            background: var(--theme-gradient);
             -webkit-background-clip: text;
             background-clip: text;
             filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
             letter-spacing: 0;
         }
 
+        /* --- CONTENIDO DE INVITACIÓN --- */
         .app-container {
             max-width: 500px;
             margin: 0 auto;
@@ -177,8 +196,8 @@
             transform: translateY(0);
         }
 
-        .gold-text {
-            background: var(--gold-gradient);
+        .cobre-text {
+            background: var(--theme-gradient);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -197,7 +216,7 @@
             font-size: 0.8rem;
             letter-spacing: 4px;
             text-transform: uppercase;
-            color: var(--lilac-dark);
+            color: var(--theme-dark);
             margin-bottom: -15px;
         }
 
@@ -219,8 +238,8 @@
             letter-spacing: 5px;
             color: var(--text-dark);
             margin-top: 20px;
-            border-top: 1px solid var(--lilac-soft);
-            border-bottom: 1px solid var(--lilac-soft);
+            border-top: 1px solid var(--theme-soft);
+            border-bottom: 1px solid var(--theme-soft);
             padding: 10px 0;
             display: inline-block;
         }
@@ -236,14 +255,14 @@
             object-fit: cover;
             border-radius: 250px 250px 0 0;
             box-shadow: 0 15px 25px rgba(0,0,0,0.1);
-            border: 1px solid rgba(191, 149, 63, 0.3); 
+            border: 1px solid rgba(184, 115, 51, 0.2); 
         }
 
         .verse {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-style: italic;
-            color: var(--lilac-dark);
+            color: var(--theme-dark);
             margin: 30px 0;
             line-height: 1.4;
             padding: 0 20px;
@@ -257,11 +276,10 @@
 
         .section-title {
             font-size: 2.2rem;
-            color: var(--lilac-dark);
+            color: var(--theme-dark);
             margin-bottom: 20px;
         }
 
-        /* Nombres en Cormorant Garamond serif, NO manuscrita */
         .parents-names {
             font-size: 1.5rem;
             color: var(--text-dark);
@@ -273,9 +291,20 @@
             font-style: italic;
         }
 
+        /* Imagen decorativa intermedia */
+        .separator-img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            border: 1px solid rgba(184, 115, 51, 0.15);
+        }
+
         .location-card {
             background: white;
-            border: 1px solid var(--lilac-soft);
+            border: 1px solid var(--theme-soft);
             padding: 35px 20px;
             margin-bottom: 30px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.03);
@@ -287,9 +316,10 @@
             content: '';
             position: absolute;
             top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 1px dashed var(--lilac-soft);
+            border: 1px dashed var(--theme-main);
             pointer-events: none;
             border-radius: 5px;
+            opacity: 0.5;
         }
 
         .location-card h3 {
@@ -313,7 +343,7 @@
         }
 
         .calendar-section {
-            background-color: var(--lilac-dark);
+            background-color: var(--theme-dark);
             padding: 60px 20px;
             color: var(--text-light);
             text-align: center;
@@ -322,7 +352,7 @@
 
         .calendar-section::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-            background: var(--gold-gradient);
+            background: var(--theme-gradient);
         }
 
         .countdown-title {
@@ -350,7 +380,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.8rem;
             line-height: 1;
-            background: var(--gold-gradient);
+            background: var(--theme-gradient);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -377,7 +407,7 @@
             font-size: 0.8rem;
             letter-spacing: 3px;
             margin-top: 5px;
-            color: #E8DCE8;
+            color: var(--theme-soft);
         }
 
         .calendar-grid {
@@ -408,14 +438,14 @@
             content: '♥';
             position: absolute;
             top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -46%);
             font-size: 28px;
             color: transparent;
-            background: var(--gold-gradient);
+            background: var(--theme-gradient);
             -webkit-background-clip: text;
             background-clip: text;
             z-index: -1;
-            opacity: 0.4;
+            opacity: 0.5;
         }
         
         .day.highlight::after {
@@ -424,7 +454,7 @@
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             width: 25px; height: 25px;
-            border: 1px solid #D4AF37;
+            border: 1px solid #E6BA9A;
             border-radius: 50%;
             z-index: -2;
         }
@@ -433,8 +463,8 @@
             display: inline-block;
             padding: 15px 40px;
             background: transparent;
-            border: 1px solid #D4AF37;
-            border-image: var(--gold-gradient) 1;
+            border: 1px solid #B87333;
+            border-image: var(--theme-gradient) 1;
             color: var(--text-dark);
             text-decoration: none;
             font-size: 0.75rem;
@@ -454,7 +484,7 @@
         .btn::before {
             content: '';
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--gold-gradient);
+            background: var(--theme-gradient);
             z-index: -1;
             opacity: 0;
             transition: opacity 0.4s ease;
@@ -471,7 +501,7 @@
         .itinerary h2 {
             font-size: 2.5rem;
             margin-bottom: 40px;
-            color: var(--lilac-dark);
+            color: var(--theme-dark);
         }
 
         .timeline-item {
@@ -488,7 +518,7 @@
             transform: translateX(-50%);
             width: 1px;
             height: 20px;
-            background: var(--gold-gradient);
+            background: var(--theme-gradient);
         }
         
         .timeline-item:last-child::after { display: none; }
@@ -496,7 +526,7 @@
         .timeline-time {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.8rem;
-            background: var(--gold-gradient);
+            background: var(--theme-gradient);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -520,8 +550,8 @@
             background: rgba(250, 250, 250, 0.85);
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            color: var(--lilac-dark);
+            border: 1px solid rgba(184, 115, 51, 0.5);
+            color: var(--theme-dark);
             font-family: 'Montserrat', sans-serif;
             font-size: 0.65rem;
             font-weight: 500;
@@ -543,14 +573,14 @@
         }
 
         .audio-btn:hover {
-            background: var(--lilac-dark);
+            background: var(--theme-dark);
             color: var(--text-light);
-            border-color: var(--lilac-dark);
+            border-color: var(--theme-dark);
         }
 
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: var(--bg-color); }
-        ::-webkit-scrollbar-thumb { background: var(--lilac-main); }
+        ::-webkit-scrollbar-thumb { background: var(--theme-main); }
 
         .gallery-section {
             padding: 60px 30px;
@@ -561,26 +591,25 @@
         .gallery-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto auto;
+            grid-auto-rows: 180px;
             gap: 12px;
         }
 
+        /* 8 Fotos en la galería */
         .gallery-item {
             position: relative;
             overflow: hidden;
             border-radius: 8px;
-            border: 1px solid rgba(191, 149, 63, 0.25);
+            border: 1px solid rgba(184, 115, 51, 0.2);
             box-shadow: 0 8px 20px rgba(0,0,0,0.07);
-            background: var(--lilac-soft);
+            background: var(--theme-soft);
         }
 
-        .gallery-item:first-child {
+        /* Haciendo algunas fotos más grandes para romper la monotonía de la cuadrícula */
+        .gallery-item:nth-child(1),
+        .gallery-item:nth-child(6) {
             grid-column: 1 / -1;
             height: 280px;
-        }
-
-        .gallery-item:not(:first-child) {
-            height: 180px;
         }
 
         .gallery-item img {
@@ -595,34 +624,9 @@
             transform: scale(1.04);
         }
 
-        .gallery-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            color: var(--lilac-main);
-        }
-
-        .gallery-placeholder span {
-            font-size: 1.8rem;
-            opacity: 0.5;
-        }
-
-        .gallery-placeholder p {
-            font-size: 0.65rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--lilac-main);
-            opacity: 0.6;
-            margin: 0;
-        }
-
         .quote-section {
             padding: 60px 40px;
-            background-color: var(--lilac-soft);
+            background-color: var(--theme-soft);
             text-align: center;
             position: relative;
         }
@@ -632,7 +636,7 @@
             content: '';
             position: absolute;
             left: 30px; right: 30px; height: 1px;
-            background: linear-gradient(to right, transparent, rgba(191,149,63,0.4), transparent);
+            background: linear-gradient(to right, transparent, rgba(184,115,51,0.4), transparent);
         }
 
         .quote-section::before { top: 0; }
@@ -643,7 +647,7 @@
             font-size: 4rem;
             line-height: 0.5;
             color: transparent;
-            background: var(--gold-gradient);
+            background: var(--theme-gradient);
             -webkit-background-clip: text;
             background-clip: text;
             opacity: 0.5;
@@ -655,7 +659,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.35rem;
             font-style: italic;
-            color: var(--lilac-dark);
+            color: var(--theme-dark);
             line-height: 1.7;
             margin: 0;
         }
@@ -668,7 +672,7 @@
 
         .rsvp-section h2 {
             font-size: 2.2rem;
-            color: var(--lilac-dark);
+            color: var(--theme-dark);
             margin-bottom: 10px;
         }
 
@@ -676,7 +680,7 @@
             font-size: 0.75rem;
             letter-spacing: 3px;
             text-transform: uppercase;
-            color: var(--lilac-main);
+            color: var(--theme-main);
             margin-bottom: 35px;
             display: block;
         }
@@ -689,8 +693,8 @@
         .rsvp-input {
             width: 100%;
             padding: 16px 20px;
-            border: 1px solid var(--lilac-soft);
-            border-bottom: 1px solid var(--lilac-main);
+            border: 1px solid var(--theme-soft);
+            border-bottom: 1px solid var(--theme-main);
             background: transparent;
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.2rem;
@@ -705,14 +709,14 @@
         }
 
         .rsvp-input::placeholder {
-            color: var(--lilac-main);
+            color: var(--theme-main);
             opacity: 0.7;
             font-style: italic;
         }
 
         .rsvp-input:focus {
-            border-color: var(--lilac-dark);
-            border-bottom-color: #D4AF37;
+            border-color: var(--theme-dark);
+            border-bottom-color: #B87333;
         }
 
         .rsvp-btn-wa {
@@ -721,8 +725,8 @@
             gap: 10px;
             padding: 16px 40px;
             background: transparent;
-            border: 1px solid #D4AF37;
-            border-image: var(--gold-gradient) 1;
+            border: 1px solid #B87333;
+            border-image: var(--theme-gradient) 1;
             color: var(--text-dark);
             font-family: 'Montserrat', sans-serif;
             font-size: 0.75rem;
@@ -742,7 +746,7 @@
         .rsvp-btn-wa::before {
             content: '';
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--gold-gradient);
+            background: var(--theme-gradient);
             z-index: -1;
             opacity: 0;
             transition: opacity 0.4s ease;
@@ -756,7 +760,7 @@
         }
 
         .closing-section {
-            background-color: var(--lilac-dark);
+            background-color: var(--theme-dark);
             padding: 80px 30px 60px;
             text-align: center;
             position: relative;
@@ -766,13 +770,13 @@
         .closing-section::before {
             content: '';
             position: absolute; top: 0; left: 0; right: 0; height: 2px;
-            background: var(--gold-gradient);
+            background: var(--theme-gradient);
         }
 
         .closing-section::after {
             content: '';
             position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
-            background: var(--gold-gradient);
+            background: var(--theme-gradient);
         }
 
         .closing-bg-text {
@@ -805,7 +809,7 @@
             font-size: clamp(2.8rem, 13vw, 5.5rem);
             line-height: 1.3;
             padding: 10px 10px 20px;
-            background: var(--gold-gradient);
+            background: var(--theme-gradient);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -826,7 +830,7 @@
         .closing-divider {
             width: 60px;
             height: 1px;
-            background: var(--gold-gradient);
+            background: var(--theme-gradient);
             margin: 25px auto;
         }
 
@@ -845,7 +849,7 @@
         }
 
         .site-footer span strong {
-            background: var(--gold-gradient);
+            background: var(--theme-gradient);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -864,7 +868,7 @@
 <div id="envelope">
     <div class="flap left"></div>
     <div class="flap right">
-        <img src="https://images.unsplash.com/photo-1572455857811-045fb4255b5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Flores" class="envelope-flowers" style="mix-blend-mode: multiply; filter: grayscale(20%) sepia(20%) hue-rotate(250deg) saturate(150%);">
+        <img src="https://images.unsplash.com/photo-1572455857811-045fb4255b5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Flores" class="envelope-flowers">
     </div>
     
     <div class="seal-wrapper" onclick="openEnvelope()">
@@ -881,20 +885,21 @@
 <div class="app-container">
     <div id="invitation-content">
         
-        <div class="hero">
+        <div class="hero animate-on-scroll">
             <div class="subtitle">MIS XV AÑOS</div>
-            <h1 class="gold-text">Ashley Carrasco</h1>
+            <h1 class="cobre-text">Ashley Carrasco</h1>
             <div class="date">23 • 10 • 2026</div>
         </div>
 
-        <div class="photo-section">
+        <div class="photo-section animate-on-scroll delay-1">
             <div class="verse">
-                "Con mucha ilusión y alegría, quiero compartir con vos un momento muy especial en mi vida. Ha llegado el día que cumpliré mis XV años y sería un honor que me acompañes para celebrarlo juntos."
+                "Doy gracias a Dios por cada paso, por cada sueño que inspira y por las personas que hacen mi vida más hermosa. Hoy agradezco profundamente por estar aquí, por acompañarme en este momento tan especial y por compartir conmigo la ilusión de este nuevo comienzo."
             </div>
-            <img src="https://images.unsplash.com/photo-1517630713740-8bd71427181c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Ashley" class="photo-arch">
+            <!-- FOTO 1: Arco principal debajo del verso -->
+            <img src="assets/1.jpg" alt="Ashley" class="photo-arch">
         </div>
 
-        <div class="info-section">
+        <div class="info-section animate-on-scroll">
             <h2 class="section-title" style="font-size: 1.8rem;">Con la bendición de Dios y de mi madre</h2>
             <div class="parents-names">
                 N. Abigail Acosta A
@@ -904,9 +909,12 @@
             <div class="parents-names">
                 Karen Guadalupe Guzmán G<br>&<br>Sergio Salvador García V
             </div>
+            
+            <!-- FOTO 2: Separador elegante en la sección de información -->
+            <img src="assets/2.jpg" alt="Detalle" class="separator-img animate-on-scroll delay-1">
         </div>
 
-        <div class="calendar-section">
+        <div class="calendar-section animate-on-scroll">
             <div class="countdown-title">FALTAN</div>
             
             <div class="countdown" id="countdown">
@@ -936,24 +944,32 @@
             <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+A%C3%B1os+de+Ashley&dates=20261023T230000Z/20261024T050000Z&details=Celebremos+juntos+los+XV+a%C3%B1os+de+Ashley&location=CDMX" target="_blank" class="btn">AGREGAR A CALENDARIO</a>
         </div>
 
-        <div class="itinerary">
+        <div class="itinerary animate-on-scroll">
             <h2>El Programa</h2>
             
-            <div class="timeline-item">
-                <div class="timeline-time">17:00</div>
+            <div class="timeline-item animate-on-scroll">
+                <div class="timeline-time">16:30</div>
                 <div class="timeline-title">Ceremonia Religiosa</div>
             </div>
             
-            <div class="timeline-item">
-                <div class="timeline-time">19:00</div>
+            <div class="timeline-item animate-on-scroll delay-1">
+                <div class="timeline-time">18:30</div>
                 <div class="timeline-title">Recepción de Invitados</div>
+            </div>
+            
+            <!-- FOTO 3: Detalle dentro del itinerario -->
+            <img src="assets/3.jpg" alt="Recepción" class="separator-img animate-on-scroll" style="height: 250px; margin: 20px 0 40px;">
+            
+            <div class="timeline-item animate-on-scroll">
+                <div class="timeline-time">21:00</div>
+                <div class="timeline-title">Cena y Baile</div>
             </div>
         </div>
 
         <div class="info-section" style="padding-top: 10px;">
-            <h2 class="section-title">Ubicaciones</h2>
+            <h2 class="section-title animate-on-scroll">Ubicaciones</h2>
             
-            <div class="location-card">
+            <div class="location-card animate-on-scroll delay-1">
                 <div class="icon-box">⛪</div>
                 <h3>Cristo Salvador</h3>
                 <p>
@@ -963,7 +979,7 @@
                 <a href="https://www.google.com/maps/search/?api=1&query=Parroquia+Cristo+Salvador+Acueducto+Guadalupe+Av+Escollera+Gustavo+A+Madero+07270" target="_blank" class="btn">VER MAPA</a>
             </div>
 
-            <div class="location-card">
+            <div class="location-card animate-on-scroll delay-2">
                 <div class="icon-box">🥂</div>
                 <h3>Salón Paraíso Casa De Piedra</h3>
                 <p>
@@ -974,59 +990,49 @@
             </div>
         </div>
 
-        <div class="info-section" style="background-color: var(--lilac-soft); padding: 50px 30px;">
+        <div class="info-section animate-on-scroll" style="background-color: var(--theme-soft); padding: 50px 30px;">
             <h2 class="section-title" style="margin-bottom: 10px;">Código de Vestimenta</h2>
-            <h3 class="gold-text" style="font-size: 1.5rem; letter-spacing: 5px; font-family: 'Montserrat', sans-serif; font-weight: 500;">FORMAL</h3>
+            <h3 class="cobre-text" style="font-size: 1.5rem; letter-spacing: 5px; font-family: 'Montserrat', sans-serif; font-weight: 500;">FORMAL</h3>
         </div>
 
-        <div class="info-section" style="padding-bottom: 80px;">
+        <div class="info-section animate-on-scroll" style="padding-bottom: 80px;">
             <div class="icon-box">✉️</div>
             <h2 class="section-title">Mesa de Regalos</h2>
             <p style="font-size: 0.95rem; line-height: 1.6; color: #555; margin-bottom: 20px;">
                 El mejor regalo es tu presencia en este día tan especial, pero si deseas tener un detalle conmigo, contaremos con la dinámica de:
             </p>
-            <h3 class="gold-text" style="font-size: 2.2rem; font-family: 'Cormorant Garamond', serif;">Lluvia de Sobres</h3>
+            <h3 class="cobre-text" style="font-size: 2.2rem; font-family: 'Cormorant Garamond', serif;">Lluvia de Sobres</h3>
             <p style="font-size: 0.8rem; color: #888; margin-top: 15px; font-style: italic;">
                 (Se colocará un pequeño buzón en la recepción para depositar tu sobre)
             </p>
         </div>
 
         <div class="gallery-section">
-            <h2 class="section-title">Galería</h2>
+            <h2 class="section-title animate-on-scroll">Galería</h2>
             <div class="gallery-grid">
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        <span>🌸</span>
-                        <p>Foto principal</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        <span>🌸</span>
-                        <p>Foto 2</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        <span>🌸</span>
-                        <p>Foto 3</p>
-                    </div>
-                </div>
+                <!-- FOTOS 4 a 11: Distribuidas en el collage -->
+                <div class="gallery-item animate-on-scroll"><img src="assets/4.jpg" alt="Foto Galería"></div>
+                <div class="gallery-item animate-on-scroll delay-1"><img src="assets/5.jpg" alt="Foto Galería"></div>
+                <div class="gallery-item animate-on-scroll delay-2"><img src="assets/6.jpg" alt="Foto Galería"></div>
+                <div class="gallery-item animate-on-scroll delay-1"><img src="assets/7.jpg" alt="Foto Galería"></div>
+                <div class="gallery-item animate-on-scroll delay-2"><img src="assets/8.jpg" alt="Foto Galería"></div>
+                <div class="gallery-item animate-on-scroll"><img src="assets/9.jpg" alt="Foto Galería"></div>
+                <div class="gallery-item animate-on-scroll delay-1"><img src="assets/10.jpg" alt="Foto Galería"></div>
+                <div class="gallery-item animate-on-scroll delay-2"><img src="assets/11.jpg" alt="Foto Galería"></div>
             </div>
         </div>
 
-        <div class="quote-section">
+        <div class="quote-section animate-on-scroll">
             <span class="quote-ornament">"</span>
             <p class="quote-text">
-                Con mucha ilusión y alegría, quiero compartir con vos<br>
-                un momento muy especial en mi vida.<br><br>
-                Ha llegado el día que cumpliré mis XV años<br>
-                y sería un honor que me acompañes<br>
-                para celebrarlo juntos.
+                Hoy agradezco profundamente por estar aquí,<br>
+                por acompañarme en este momento tan especial<br>
+                y por compartir conmigo la ilusión<br>
+                de este nuevo comienzo.
             </p>
         </div>
 
-        <div class="rsvp-section">
+        <div class="rsvp-section animate-on-scroll">
             <h2 class="section-title">Confirmación</h2>
             <span class="rsvp-sub">¿Nos acompañas?</span>
 
@@ -1049,7 +1055,7 @@
             </a>
         </div>
 
-        <div class="closing-section">
+        <div class="closing-section animate-on-scroll">
             <div class="closing-bg-text">XV</div>
             <span class="closing-label">Mis XV Años</span>
             <span class="closing-name">Ashley Carrasco</span>
@@ -1068,13 +1074,37 @@
     const bgMusic = document.getElementById('bg-music');
     const audioBtn = document.getElementById('audio-btn');
 
+    // Animaciones al hacer scroll (Intersection Observer)
+    document.addEventListener("DOMContentLoaded", function() {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(element => {
+            observer.observe(element);
+        });
+    });
+
     function openEnvelope() {
         const envelope = document.getElementById('envelope');
         const content = document.getElementById('invitation-content');
         envelope.classList.add('open');
         bgMusic.play().catch(error => console.log("Autoplay bloqueado:", error));
         setTimeout(() => { audioBtn.classList.add('visible'); }, 800);
-        setTimeout(() => { content.classList.add('visible'); window.scrollTo({ top: 0, behavior: 'smooth' }); }, 300); 
+        setTimeout(() => { 
+            content.classList.add('visible'); 
+            window.scrollTo({ top: 0, behavior: 'smooth' }); 
+        }, 300); 
     }
 
     function toggleAudio() {
@@ -1097,7 +1127,7 @@
         const distance = countDownDate - new Date().getTime();
         if (distance < 0) {
             clearInterval(timerInterval);
-            document.getElementById("countdown").innerHTML = "<div style='font-family: Cormorant Garamond, serif; font-size: 2rem; color: #D4AF37;'>¡Es Hoy!</div>";
+            document.getElementById("countdown").innerHTML = "<div style='font-family: Cormorant Garamond, serif; font-size: 2rem; color: #B87333;'>¡Es Hoy!</div>";
             return;
         }
         const pad = n => n < 10 ? "0" + n : n;
