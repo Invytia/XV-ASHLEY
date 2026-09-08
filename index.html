@@ -7,11 +7,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Great+Vibes&family=Pinyon+Script&family=Tangerine:wght@400;700&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Paleta Blush Cobre */
-            --theme-soft: #FDF6F5; /* Blush muy suave para fondos */
-            --theme-main: #D8A79E; /* Blush medio */
-            --theme-dark: #9C5B4F; /* Cobre oscuro / terracota */
-            --theme-gradient: linear-gradient(135deg, #C77D63, #F5D3C4, #B87333, #FAE6DD, #8C5346);
+            /* Paleta Rose Gold / Dusty Rose (Elegante y suave) */
+            --theme-soft: #FBF7F8; /* Rosa muy pálido, casi blanco */
+            --theme-main: #D8B4B8; /* Rosa empolvado / Dusty rose */
+            --theme-dark: #B07D83; /* Tono profundo tipo Rose Gold oscuro */
+            --theme-gradient: linear-gradient(135deg, #D4AFB9, #FDF7F8, #C497A0, #F2E3E5, #A87B83);
             --bg-color: #FAFAFA;
             --text-dark: #2C2C2C;
             --text-light: #FFFFFF;
@@ -70,7 +70,7 @@
 
         .flap.left { 
             left: 0; 
-            border-right: 1px solid rgba(216, 167, 158, 0.3);
+            border-right: 1px solid rgba(216, 180, 184, 0.3);
             transform-origin: left center;
             z-index: 2;
         }
@@ -91,9 +91,9 @@
             object-fit: cover; 
             opacity: 0.85;
             pointer-events: none;
-            /* Filtro para dar tono blush/cobre a la textura de flores */
+            /* Filtro ajustado al nuevo tono rose gold / empolvado */
             mix-blend-mode: multiply; 
-            filter: grayscale(20%) sepia(30%) hue-rotate(340deg) saturate(160%);
+            filter: grayscale(10%) sepia(20%) hue-rotate(320deg) saturate(120%);
         }
 
         #envelope.open .flap.left { transform: translateX(-100%); }
@@ -144,7 +144,7 @@
         .wax-seal {
             width: 90px;
             height: 90px;
-            background: radial-gradient(circle at 30% 30%, #E2C2BD, #D8A79E, #A56457);
+            background: radial-gradient(circle at 30% 30%, #E6CDD1, #D8B4B8, #946369);
             border-radius: 50%;
             box-shadow: 
                 inset 0 0 5px rgba(255,255,255,0.4),
@@ -196,7 +196,7 @@
             transform: translateY(0);
         }
 
-        .cobre-text {
+        .rose-gold-text {
             background: var(--theme-gradient);
             -webkit-background-clip: text;
             background-clip: text;
@@ -255,7 +255,7 @@
             object-fit: cover;
             border-radius: 250px 250px 0 0;
             box-shadow: 0 15px 25px rgba(0,0,0,0.1);
-            border: 1px solid rgba(184, 115, 51, 0.2); 
+            border: 1px solid rgba(176, 125, 131, 0.2); 
         }
 
         .verse {
@@ -299,7 +299,7 @@
             border-radius: 12px;
             margin: 30px 0;
             box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-            border: 1px solid rgba(184, 115, 51, 0.15);
+            border: 1px solid rgba(176, 125, 131, 0.15);
         }
 
         .location-card {
@@ -454,7 +454,7 @@
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             width: 25px; height: 25px;
-            border: 1px solid #E6BA9A;
+            border: 1px solid var(--theme-main);
             border-radius: 50%;
             z-index: -2;
         }
@@ -463,7 +463,7 @@
             display: inline-block;
             padding: 15px 40px;
             background: transparent;
-            border: 1px solid #B87333;
+            border: 1px solid var(--theme-dark);
             border-image: var(--theme-gradient) 1;
             color: var(--text-dark);
             text-decoration: none;
@@ -550,7 +550,7 @@
             background: rgba(250, 250, 250, 0.85);
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
-            border: 1px solid rgba(184, 115, 51, 0.5);
+            border: 1px solid rgba(176, 125, 131, 0.5);
             color: var(--theme-dark);
             font-family: 'Montserrat', sans-serif;
             font-size: 0.65rem;
@@ -588,28 +588,30 @@
             text-align: center;
         }
 
+        /* Cuadrícula de fotos arreglada para evitar encimamientos usando aspect-ratio */
         .gallery-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-auto-rows: 180px;
+            grid-template-columns: repeat(2, 1fr);
             gap: 12px;
+            grid-auto-flow: row;
         }
 
-        /* 8 Fotos en la galería */
         .gallery-item {
             position: relative;
             overflow: hidden;
             border-radius: 8px;
-            border: 1px solid rgba(184, 115, 51, 0.2);
+            border: 1px solid rgba(176, 125, 131, 0.2);
             box-shadow: 0 8px 20px rgba(0,0,0,0.07);
             background: var(--theme-soft);
+            aspect-ratio: 1 / 1; /* Fotos cuadradas por defecto */
+            cursor: pointer; /* Indica que se puede hacer clic */
         }
 
-        /* Haciendo algunas fotos más grandes para romper la monotonía de la cuadrícula */
+        /* Hacemos la primera y la sexta foto panorámicas */
         .gallery-item:nth-child(1),
         .gallery-item:nth-child(6) {
             grid-column: 1 / -1;
-            height: 280px;
+            aspect-ratio: 16 / 9; /* Foto horizontal */
         }
 
         .gallery-item img {
@@ -624,6 +626,44 @@
             transform: scale(1.04);
         }
 
+        /* --- LIGHTBOX (Pantalla Completa para fotos) --- */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 100000;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        #lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        #lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-family: sans-serif;
+            cursor: pointer;
+            z-index: 100001;
+        }
+
         .quote-section {
             padding: 60px 40px;
             background-color: var(--theme-soft);
@@ -636,7 +676,7 @@
             content: '';
             position: absolute;
             left: 30px; right: 30px; height: 1px;
-            background: linear-gradient(to right, transparent, rgba(184,115,51,0.4), transparent);
+            background: linear-gradient(to right, transparent, rgba(176, 125, 131,0.4), transparent);
         }
 
         .quote-section::before { top: 0; }
@@ -716,7 +756,7 @@
 
         .rsvp-input:focus {
             border-color: var(--theme-dark);
-            border-bottom-color: #B87333;
+            border-bottom-color: var(--theme-dark);
         }
 
         .rsvp-btn-wa {
@@ -725,7 +765,7 @@
             gap: 10px;
             padding: 16px 40px;
             background: transparent;
-            border: 1px solid #B87333;
+            border: 1px solid var(--theme-dark);
             border-image: var(--theme-gradient) 1;
             color: var(--text-dark);
             font-family: 'Montserrat', sans-serif;
@@ -786,7 +826,7 @@
             transform: translate(-50%, -50%);
             font-family: 'Cormorant Garamond', serif;
             font-size: 10rem;
-            color: rgba(255,255,255,0.03);
+            color: rgba(255,255,255,0.04);
             white-space: nowrap;
             pointer-events: none;
             letter-spacing: -5px;
@@ -797,7 +837,7 @@
             font-size: 0.7rem;
             letter-spacing: 5px;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.7);
             margin-bottom: 10px;
             display: block;
         }
@@ -822,7 +862,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.1rem;
             letter-spacing: 6px;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255,255,255,0.6);
             margin-top: 20px;
             display: block;
         }
@@ -887,7 +927,7 @@
         
         <div class="hero animate-on-scroll">
             <div class="subtitle">MIS XV AÑOS</div>
-            <h1 class="cobre-text">Ashley Carrasco</h1>
+            <h1 class="rose-gold-text">Ashley Carrasco</h1>
             <div class="date">23 • 10 • 2026</div>
         </div>
 
@@ -992,7 +1032,7 @@
 
         <div class="info-section animate-on-scroll" style="background-color: var(--theme-soft); padding: 50px 30px;">
             <h2 class="section-title" style="margin-bottom: 10px;">Código de Vestimenta</h2>
-            <h3 class="cobre-text" style="font-size: 1.5rem; letter-spacing: 5px; font-family: 'Montserrat', sans-serif; font-weight: 500;">FORMAL</h3>
+            <h3 class="rose-gold-text" style="font-size: 1.5rem; letter-spacing: 5px; font-family: 'Montserrat', sans-serif; font-weight: 500;">FORMAL</h3>
         </div>
 
         <div class="info-section animate-on-scroll" style="padding-bottom: 80px;">
@@ -1001,7 +1041,7 @@
             <p style="font-size: 0.95rem; line-height: 1.6; color: #555; margin-bottom: 20px;">
                 El mejor regalo es tu presencia en este día tan especial, pero si deseas tener un detalle conmigo, contaremos con la dinámica de:
             </p>
-            <h3 class="cobre-text" style="font-size: 2.2rem; font-family: 'Cormorant Garamond', serif;">Lluvia de Sobres</h3>
+            <h3 class="rose-gold-text" style="font-size: 2.2rem; font-family: 'Cormorant Garamond', serif;">Lluvia de Sobres</h3>
             <p style="font-size: 0.8rem; color: #888; margin-top: 15px; font-style: italic;">
                 (Se colocará un pequeño buzón en la recepción para depositar tu sobre)
             </p>
@@ -1009,16 +1049,18 @@
 
         <div class="gallery-section">
             <h2 class="section-title animate-on-scroll">Galería</h2>
+            <p style="font-size: 0.75rem; color: #888; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 25px;" class="animate-on-scroll">Toca las fotos para ampliarlas</p>
+            
             <div class="gallery-grid">
-                <!-- FOTOS 4 a 11: Distribuidas en el collage -->
-                <div class="gallery-item animate-on-scroll"><img src="assets/4.jpg" alt="Foto Galería"></div>
-                <div class="gallery-item animate-on-scroll delay-1"><img src="assets/5.jpg" alt="Foto Galería"></div>
-                <div class="gallery-item animate-on-scroll delay-2"><img src="assets/6.jpg" alt="Foto Galería"></div>
-                <div class="gallery-item animate-on-scroll delay-1"><img src="assets/7.jpg" alt="Foto Galería"></div>
-                <div class="gallery-item animate-on-scroll delay-2"><img src="assets/8.jpg" alt="Foto Galería"></div>
-                <div class="gallery-item animate-on-scroll"><img src="assets/9.jpg" alt="Foto Galería"></div>
-                <div class="gallery-item animate-on-scroll delay-1"><img src="assets/10.jpg" alt="Foto Galería"></div>
-                <div class="gallery-item animate-on-scroll delay-2"><img src="assets/11.jpg" alt="Foto Galería"></div>
+                <!-- FOTOS 4 a 11: Se abre en lightbox al hacer clic -->
+                <div class="gallery-item animate-on-scroll" onclick="openLightbox('assets/4.jpg')"><img src="assets/4.jpg" alt="Foto Galería"></div>
+                <div class="gallery-item animate-on-scroll delay-1" onclick="openLightbox('assets/5.jpg')"><img src="assets/5.jpg" alt="Foto Galería"></div>
+                <div class="gallery-item animate-on-scroll delay-2" onclick="openLightbox('assets/6.jpg')"><img src="assets/6.jpg" alt="Foto Galería"></div>
+                <div class="gallery-item animate-on-scroll delay-1" onclick="openLightbox('assets/7.jpg')"><img src="assets/7.jpg" alt="Foto Galería"></div>
+                <div class="gallery-item animate-on-scroll delay-2" onclick="openLightbox('assets/8.jpg')"><img src="assets/8.jpg" alt="Foto Galería"></div>
+                <div class="gallery-item animate-on-scroll" onclick="openLightbox('assets/9.jpg')"><img src="assets/9.jpg" alt="Foto Galería"></div>
+                <div class="gallery-item animate-on-scroll delay-1" onclick="openLightbox('assets/10.jpg')"><img src="assets/10.jpg" alt="Foto Galería"></div>
+                <div class="gallery-item animate-on-scroll delay-2" onclick="openLightbox('assets/11.jpg')"><img src="assets/11.jpg" alt="Foto Galería"></div>
             </div>
         </div>
 
@@ -1070,6 +1112,12 @@
     </div>
 </div>
 
+<!-- Estructura del Lightbox (Pantalla Completa) -->
+<div id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="Fullscreen">
+</div>
+
 <script>
     const bgMusic = document.getElementById('bg-music');
     const audioBtn = document.getElementById('audio-btn');
@@ -1095,6 +1143,7 @@
         });
     });
 
+    // Abrir el sobre principal
     function openEnvelope() {
         const envelope = document.getElementById('envelope');
         const content = document.getElementById('invitation-content');
@@ -1107,11 +1156,28 @@
         }, 300); 
     }
 
+    // Botón de audio
     function toggleAudio() {
         if (bgMusic.paused) { bgMusic.play(); audioBtn.innerText = 'PAUSAR'; }
         else { bgMusic.pause(); audioBtn.innerText = 'REANUDAR'; }
     }
 
+    // Funciones del Lightbox (Pantalla completa para galería)
+    function openLightbox(src) {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        lightboxImg.src = src;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Evita el scroll del fondo
+    }
+
+    function closeLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto'; // Restaura el scroll
+    }
+
+    // WhatsApp RSVP
     function confirmRSVP(e) {
         e.preventDefault();
         const name = document.getElementById('rsvp-name').value.trim();
@@ -1122,12 +1188,13 @@
         window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
     }
 
-    const countDownDate = new Date("Oct 23, 2026 18:00:00").getTime();
+    // Cuenta regresiva
+    const countDownDate = new Date("Oct 23, 2026 16:30:00").getTime();
     const timerInterval = setInterval(function() {
         const distance = countDownDate - new Date().getTime();
         if (distance < 0) {
             clearInterval(timerInterval);
-            document.getElementById("countdown").innerHTML = "<div style='font-family: Cormorant Garamond, serif; font-size: 2rem; color: #B87333;'>¡Es Hoy!</div>";
+            document.getElementById("countdown").innerHTML = "<div style='font-family: Cormorant Garamond, serif; font-size: 2rem; color: #B07D83;'>¡Es Hoy!</div>";
             return;
         }
         const pad = n => n < 10 ? "0" + n : n;
